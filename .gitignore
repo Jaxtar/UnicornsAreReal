@@ -62,7 +62,5 @@ build/
 .vscode/
 
 
-**/src/**/resources/application.properties
-
-*.java
+#Sensitive info
 src/main/resources/application.properties
