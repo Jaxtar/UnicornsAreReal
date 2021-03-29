@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class UarApplication {
 
+	//Start
 	public static void main(String[] args) {
 		SpringApplication.run(UarApplication.class, args);
 	}
