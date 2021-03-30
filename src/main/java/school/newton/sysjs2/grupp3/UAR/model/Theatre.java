@@ -1,39 +1,30 @@
 package school.newton.sysjs2.grupp3.UAR.model;
 
 import com.vaadin.flow.component.template.Id;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 
 @Entity
 public class Theatre {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer theatreID;
-
-    public String theatreName;
-
-    public Theatre(Integer theatreID, String theatreName) {
-        this.theatreID = theatreID;
-        this.theatreName = theatreName;
-    }
+    public Integer theatreid;
+    public String theatrename;
 
     public Integer getTheatreID() {
-        return theatreID;
+        return theatreid;
     }
 
-    public void setTheatreID(Integer theatreID) {
-        this.theatreID = theatreID;
+    public void setTheatreID(Integer theatreid) {
+        this.theatreid = theatreid;
     }
 
     public String getTheatreName() {
-        return theatreName;
+        return theatrename;
     }
 
-    public void setTheatreName(String theatreName) {
-        this.theatreName = theatreName;
+    public void setTheatreName(String theatrename) {
+        this.theatrename = theatrename;
     }
-
 
 }
