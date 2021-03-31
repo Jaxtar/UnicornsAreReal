@@ -8,7 +8,6 @@ import school.newton.sysjs2.grupp3.UAR.repository.TheatreRepository;
 
 
 @Controller
-@RequestMapping (path="/theatres")
 public class TheatreController {
 
     @Autowired
@@ -18,7 +17,6 @@ public class TheatreController {
         this.repository = repository;
     }
 
-    @GetMapping(path="/all")
     public @ResponseBody Iterable<Theatre> getAllTheatres() {
         return repository.findAll();
     }

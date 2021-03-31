@@ -9,7 +9,7 @@ import java.sql.Time;
 import java.util.Date;
 
 @Entity
-public class StaffSchedule {
+public class Staffschedule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
