@@ -1,10 +1,10 @@
-package school.newton.sysjs2.grupp3.UAR.controller;
+package school.newton.sysjs2.grupp3.UAR.backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ResponseBody;
-import school.newton.sysjs2.grupp3.UAR.model.Booking;
-import school.newton.sysjs2.grupp3.UAR.repository.BookingRepository;
+import school.newton.sysjs2.grupp3.UAR.backend.model.Booking;
+import school.newton.sysjs2.grupp3.UAR.backend.repository.BookingRepository;
 
 
 @Controller
