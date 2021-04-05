@@ -15,6 +15,16 @@ public class Movie {
     public String description;
     public String agerating;
 
+    protected Movie(){
+
+    }
+
+    public Movie(String title, String description, String agerating){
+    this.title = title;
+    this.description = description;
+    this.agerating = agerating;
+    }
+
     public Integer getMovieid() {
         return movieid;
     }
