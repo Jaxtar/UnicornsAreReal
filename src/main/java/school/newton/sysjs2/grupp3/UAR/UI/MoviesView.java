@@ -2,6 +2,7 @@ package school.newton.sysjs2.grupp3.UAR.UI;
 
 
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
@@ -19,6 +20,8 @@ public class MoviesView extends VerticalLayout {
     private TextField filter;
     private MovieRepository repository;
 
+    private MoviesForm moviesForm;
+
     public MoviesView(MovieController movieController, MovieRepository repository){
         this.movieController = movieController;
         this.filter = new TextField();
@@ -27,12 +30,17 @@ public class MoviesView extends VerticalLayout {
         configureFilter();
         configureGrid();
 
-        add(filter, grid);
+        moviesForm = new MoviesForm();
+
+        Div content = new Div(grid, moviesForm);
+       // content.setSizeFull();
+
+        add(filter, content);
         updateList();
     }
 
     private void configureFilter() {
-        filter.setPlaceholder("Filter by name...");
+        filter.setPlaceholder("Filter by title or rating...");
         filter.setClearButtonVisible(true);
         filter.setValueChangeMode(ValueChangeMode.LAZY);
         filter.addValueChangeListener(e -> updateList());
@@ -40,6 +48,8 @@ public class MoviesView extends VerticalLayout {
 
     private void configureGrid() {
         grid.setSizeFull();
+        grid.getColumns().forEach(col -> col.setAutoWidth(true));
+
         grid.setColumns("title", "agerating");
     }
 
