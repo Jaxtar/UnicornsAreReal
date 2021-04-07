@@ -18,6 +18,7 @@ public class MoviesForm extends FormLayout {
     Button close = new Button("Cancel");
 
     public MoviesForm() {
+        addClassName("movies-form");
         add(title, agerating, description,
         createButtonsLayout());
     }

@@ -1,6 +1,7 @@
 package school.newton.sysjs2.grupp3.UAR.UI;
 
 
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -13,6 +14,7 @@ import school.newton.sysjs2.grupp3.UAR.backend.repository.MovieRepository;
 
 
 @Route("/movies")
+@CssImport("common.css")
 public class MoviesView extends VerticalLayout {
 
     Grid<Movie> grid = new Grid<>(Movie.class);
@@ -24,6 +26,7 @@ public class MoviesView extends VerticalLayout {
 
     public MoviesView(MovieController movieController, MovieRepository repository){
         this.movieController = movieController;
+        addClassName("list-view");
         this.filter = new TextField();
         this.repository = repository;
         setSizeFull();
@@ -33,7 +36,8 @@ public class MoviesView extends VerticalLayout {
         moviesForm = new MoviesForm();
 
         Div content = new Div(grid, moviesForm);
-       // content.setSizeFull();
+        content.addClassName("content");
+        content.setSizeFull();
 
         add(filter, content);
         updateList();
