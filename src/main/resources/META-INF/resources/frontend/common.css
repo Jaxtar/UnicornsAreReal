@@ -12,7 +12,7 @@
     flex: 2;
 }
 
-.list-view .movies-form {
+.list-view .movie-form {
     flex: 1;
     padding: var(--lumo-space-m);
 }

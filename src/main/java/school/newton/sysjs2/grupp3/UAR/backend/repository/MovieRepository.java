@@ -15,7 +15,7 @@ public interface MovieRepository extends CrudRepository<Movie, Integer> {
    @Query("select * from movie " +
            "where title like lower(concat('%', :searchTerm, '%'))" +
            "or agerating like lower(concat('%', :searchTerm, '%'))"
-           // +"or description like lower(concat('%', :searchTerm, '%'))"
+           + "or description like lower(concat('%', :searchTerm, '%'))"
            )
    List<Movie> search(@Param("searchTerm") String searchTerm);
 }
