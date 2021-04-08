@@ -1,7 +1,33 @@
+.tabs{
+    color: blue;
+    align-self: center;
+}
+
+/* List view */
+.list-view .content {
+    display: flex;
+}
+
+.list-view .movies-grid {
+    flex: 2;
+}
+
+.list-view .movies-form {
+    flex: 1;
+    padding: var(--lumo-space-m);
+}
+
+@media all and (max-width: 1100px) {
+    .list-view.editing .toolbar,
+    .list-view.editing .movies-grid {
+        display: none;
+   }
+
 .name{
     font-size:xx-large;
 }
 
 .header{
     font-size: xx-large;
+
 }

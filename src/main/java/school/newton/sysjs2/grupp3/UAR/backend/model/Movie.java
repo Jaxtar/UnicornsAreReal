@@ -1,4 +1,4 @@
-package school.newton.sysjs2.grupp3.UAR.model;
+package school.newton.sysjs2.grupp3.UAR.backend.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +14,16 @@ public class Movie {
     public String title;
     public String description;
     public String agerating;
+
+    protected Movie(){
+
+    }
+
+    public Movie(String title, String description, String agerating){
+    this.title = title;
+    this.description = description;
+    this.agerating = agerating;
+    }
 
     public Integer getMovieid() {
         return movieid;
