@@ -4,6 +4,7 @@ import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -19,7 +20,7 @@ public class MovieForm extends FormLayout {
 
     TextField title = new TextField("Title");
     TextField agerating = new TextField("Agerating");
-    TextField description = new TextField("Description");
+    TextArea description = new TextArea("Description");
 
     Button save = new Button("Save");
     Button delete = new Button("Delete");

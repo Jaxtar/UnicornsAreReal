@@ -15,7 +15,7 @@ import school.newton.sysjs2.grupp3.UAR.backend.model.Movie;
 import school.newton.sysjs2.grupp3.UAR.backend.repository.MovieRepository;
 
 
-@Route(value="/movies")
+@Route(value="/movies", layout=Navbar.class)
 @CssImport("./common.css")
 public class MoviesView extends VerticalLayout {
 

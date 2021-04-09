@@ -5,6 +5,7 @@ import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
 
@@ -18,12 +19,12 @@ public class Navbar extends AppLayout{
     }
 
     private void createHeader() {
-        H1 name = new H1("Unicorns Are Real");
+        H2 name = new H2("Unicorns Are Real");
         name.addClassName("name");
         name.addClickListener(e -> UI.getCurrent().navigate(MainPage.class));
         
         Button movies = new Button("Movies");
-        movies.addClickListener(e -> UI.getCurrent().navigate(MainPage.class));
+        movies.addClickListener(e -> UI.getCurrent().navigate(MoviesView.class));
         Button ticket = new Button("Book A Ticket");
         ticket.addClickListener(e -> UI.getCurrent().navigate(Test2.class));
         Button theatre = new Button("Choose A Theatre");
