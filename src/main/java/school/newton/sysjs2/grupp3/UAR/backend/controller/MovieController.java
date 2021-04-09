@@ -7,10 +7,12 @@ import school.newton.sysjs2.grupp3.UAR.backend.model.Movie;
 import school.newton.sysjs2.grupp3.UAR.backend.repository.MovieRepository;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Controller
 public class MovieController {
-
+    private static final Logger LOGGER = Logger.getLogger(MovieController.class.getName());
     private MovieRepository repository;
 
     @Autowired
@@ -26,7 +28,24 @@ public class MovieController {
         if (stringFilter == null || stringFilter.isEmpty()){
             return repository.findAll();
         } else {
-            return repository.search(stringFilter);
+            return repository.findByTitle(stringFilter);
         }
+    }
+
+    public void delete(Movie movie) {
+        repository.delete(movie);
+    }
+
+    public void save(Movie movie) {
+        if (movie == null) {
+            LOGGER.log(Level.SEVERE, "Movie is null. Are you sure you have connected your form to the application?");
+            return;
+        }
+        LOGGER.log(Level.SEVERE,
+                "ID: "+ movie.getMovieid() +
+                " Title: " + movie.getTitle() +
+                " Rating: " + movie.getAgerating() +
+                " Description: " + movie.getDescription() );
+        repository.save(movie);
     }
 }
