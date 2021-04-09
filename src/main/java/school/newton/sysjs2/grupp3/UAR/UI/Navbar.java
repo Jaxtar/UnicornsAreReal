@@ -9,6 +9,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
 
 import school.newton.sysjs2.grupp3.UAR.UI.views.MainPage;
+import school.newton.sysjs2.grupp3.UAR.UI.views.MoviesView;
 import school.newton.sysjs2.grupp3.UAR.UI.views.Test2;
 
 @CssImport("/common.css")
@@ -23,7 +24,7 @@ public class Navbar extends AppLayout{
         name.addClickListener(e -> UI.getCurrent().navigate(MainPage.class));
         
         Button movies = new Button("Movies");
-        movies.addClickListener(e -> UI.getCurrent().navigate(MainPage.class));
+        movies.addClickListener(e -> UI.getCurrent().navigate(MoviesView.class));
         Button ticket = new Button("Book A Ticket");
         ticket.addClickListener(e -> UI.getCurrent().navigate(Test2.class));
         Button theatre = new Button("Choose A Theatre");

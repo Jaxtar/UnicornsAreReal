@@ -10,12 +10,14 @@ public class Staff {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer staffid;
-    public String firstname;
-    public String lastname;
-    public String email;
-    public String username;
-    public String password;
+    private Integer staffid;
+    private String firstname;
+    private String lastname;
+    private String email;
+    private String username;
+    private String password;
+
+    public Staff(){}
 
     public Integer getStaffid() {
         return staffid;

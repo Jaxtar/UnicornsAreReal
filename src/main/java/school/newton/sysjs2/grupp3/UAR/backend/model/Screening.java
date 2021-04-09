@@ -11,12 +11,14 @@ import java.util.Date;
 public class Screening {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer screeningid;
-    public Integer _movieid;
-    public Integer _salonid;
-    public Date date;
-    public Time start_time;
-    public Time end_time;
+    private Integer screeningid;
+    private Integer _movieid;
+    private Integer _salonid;
+    private Date date;
+    private Time start_time;
+    private Time end_time;
+
+    public Screening(){}
 
     public Integer getScreeningid() {
         return screeningid;
