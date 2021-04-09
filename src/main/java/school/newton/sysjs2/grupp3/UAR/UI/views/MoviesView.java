@@ -89,7 +89,7 @@ public class MoviesView extends VerticalLayout {
     }
 
     private HorizontalLayout getToolbar() {
-        filter.setPlaceholder("Filter by title or rating...");
+        filter.setPlaceholder("Filter by title...");
         filter.setClearButtonVisible(true);
         filter.setValueChangeMode(ValueChangeMode.LAZY);
         filter.addValueChangeListener(e -> updateList());
