@@ -28,7 +28,7 @@ public class MovieController {
         if (stringFilter == null || stringFilter.isEmpty()){
             return repository.findAll();
         } else {
-            return repository.search(stringFilter);
+            return repository.findByTitle(stringFilter);
         }
     }
 

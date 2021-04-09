@@ -11,5 +11,6 @@ import java.util.List;
 public interface MovieRepository extends CrudRepository<Movie, Integer> {
    List<Movie> findAll();
 
-      List<Movie> search(@Param("searchTerm") String searchTerm);
+
+   List<Movie> findByTitle(String searchTerm);
 }
