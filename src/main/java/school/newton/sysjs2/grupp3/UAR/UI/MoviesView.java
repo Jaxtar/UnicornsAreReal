@@ -16,7 +16,7 @@ import school.newton.sysjs2.grupp3.UAR.backend.repository.MovieRepository;
 
 
 @Route(value="/movies")
-@CssImport("common.css")
+@CssImport("/common.css")
 public class MoviesView extends VerticalLayout {
 
     Grid<Movie> grid = new Grid<>(Movie.class);

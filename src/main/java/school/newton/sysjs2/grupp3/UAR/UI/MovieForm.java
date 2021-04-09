@@ -79,6 +79,7 @@ public class MovieForm extends FormLayout {
 
     public static class SaveEvent extends MovieFormEvent {
         SaveEvent(MovieForm source, Movie movie) {
+
             super(source, movie);
         }
     }
