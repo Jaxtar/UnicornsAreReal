@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface MovieRepository extends CrudRepository<Movie, Integer> {
    List<Movie> findAll();
-
+   
       List<Movie> search(@Param("searchTerm") String searchTerm);
 }

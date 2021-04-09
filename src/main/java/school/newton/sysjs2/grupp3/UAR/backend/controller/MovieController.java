@@ -42,7 +42,11 @@ public class MovieController {
             LOGGER.log(Level.SEVERE, "Movie is null. Are you sure you have connected your form to the application?");
             return;
         }
-        LOGGER.log(Level.SEVERE, "ID: "+ movie.getMovieid() + " Title: " + movie.getTitle() + " Rating: " + movie.getAgerating() + " Description: " + movie.getDescription() );
+        LOGGER.log(Level.SEVERE,
+                "ID: "+ movie.getMovieid() +
+                " Title: " + movie.getTitle() +
+                " Rating: " + movie.getAgerating() +
+                " Description: " + movie.getDescription() );
         repository.save(movie);
     }
 }
