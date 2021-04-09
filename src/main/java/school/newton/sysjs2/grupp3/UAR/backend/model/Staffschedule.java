@@ -1,10 +1,9 @@
 package school.newton.sysjs2.grupp3.UAR.backend.model;
 
-import com.vaadin.flow.component.template.Id;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.sql.Time;
 import java.util.Date;
 
