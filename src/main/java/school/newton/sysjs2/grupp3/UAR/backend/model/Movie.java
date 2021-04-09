@@ -10,12 +10,12 @@ public class Movie {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    public Integer movieid;
-    public String title;
-    public String description;
-    public String agerating;
+    private Integer movieid;
+    private String title;
+    private String description;
+    private String agerating;
 
-    protected Movie(){
+    public Movie(){
 
     }
 

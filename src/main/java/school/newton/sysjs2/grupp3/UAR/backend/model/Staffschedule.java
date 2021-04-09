@@ -9,17 +9,19 @@ import java.sql.Time;
 import java.util.Date;
 
 @Entity
-public class Staffschedule {
+public class StaffSchedule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer staffscheduleid;
-    public Date date;
-    public Time start_time;
-    public Time end_time;
-    public String workarea;
-    public Integer _staffid;
-    public Integer _theatreid;
+    private Integer staffscheduleid;
+    private Date date;
+    private Time start_time;
+    private Time end_time;
+    private String workarea;
+    private Integer _staffid;
+    private Integer _theatreid;
+
+    public StaffSchedule(){}
 
     public Integer getStaffscheduleid() {
         return staffscheduleid;
