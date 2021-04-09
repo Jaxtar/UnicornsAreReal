@@ -1,6 +1,5 @@
 package school.newton.sysjs2.grupp3.UAR.model;
 
-import com.vaadin.flow.component.template.Id;
 import javax.persistence.*;
 
 @Entity
