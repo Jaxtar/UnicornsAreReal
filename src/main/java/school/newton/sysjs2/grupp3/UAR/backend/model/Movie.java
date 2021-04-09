@@ -4,20 +4,29 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Movie {
 
+
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Integer movieid;
-    private String title;
-    private String description;
-    private String agerating;
+    private Integer movieid = null;
 
-    public Movie(){
+    @NotNull
+    @NotEmpty
+    private String title = "";
 
-    }
+    @NotNull
+    @NotEmpty
+    private String description = "";
+
+    @NotNull
+    @NotEmpty
+    private String agerating = "";
+
 
     public Movie(String title, String description, String agerating){
     this.title = title;
@@ -25,12 +34,12 @@ public class Movie {
     this.agerating = agerating;
     }
 
-    public Integer getMovieid() {
-        return movieid;
+    public Movie() {
+
     }
 
-    public void setMovieid(Integer movieid) {
-        this.movieid = movieid;
+    public Integer getMovieid() {
+        return movieid;
     }
 
     public String getTitle() {
