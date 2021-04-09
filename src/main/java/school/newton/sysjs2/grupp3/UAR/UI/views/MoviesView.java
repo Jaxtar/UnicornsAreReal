@@ -10,12 +10,13 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 
 import school.newton.sysjs2.grupp3.UAR.UI.MoviesForm;
+import school.newton.sysjs2.grupp3.UAR.UI.Navbar;
 import school.newton.sysjs2.grupp3.UAR.backend.controller.MovieController;
 import school.newton.sysjs2.grupp3.UAR.backend.model.Movie;
 import school.newton.sysjs2.grupp3.UAR.backend.repository.MovieRepository;
 
 
-@Route("/movies")
+@Route(value="/movies", layout=Navbar.class)
 @CssImport("/common.css")
 public class MoviesView extends VerticalLayout {
 
