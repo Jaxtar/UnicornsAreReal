@@ -10,22 +10,21 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Movie {
 
-
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Integer movieid = null;
+    private Integer movieid;
 
     @NotNull
     @NotEmpty
-    private String title = "";
+    private String title;
 
     @NotNull
     @NotEmpty
-    private String description = "";
+    private String description;
 
     @NotNull
     @NotEmpty
-    private String agerating = "";
+    private String agerating;
 
 
     public Movie(String title, String description, String agerating){
