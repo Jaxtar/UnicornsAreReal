@@ -2,6 +2,7 @@ package school.newton.sysjs2.grupp3.UAR;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -10,8 +11,8 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import org.apache.commons.lang3.StringUtils;
+import school.newton.sysjs2.grupp3.UAR.controller.StaffController;
 import school.newton.sysjs2.grupp3.UAR.model.Staff;
-import school.newton.sysjs2.grupp3.UAR.repository.StaffRepository;
 
 import java.util.Collection;
 
@@ -21,47 +22,90 @@ import java.util.Collection;
 @PageTitle("Staff - Info - Unicorns Are Real")
 public class StaffView extends VerticalLayout {
 
-    private final StaffRepository repo;
-    //private final StaffEditor editor;
-    final Grid<Staff> grid;
-    final TextField filter;
-    private final Button addNewButton;
+    Grid<Staff> grid = new Grid<>(Staff.class);
+    private StaffController staffController;
+    private TextField filter;
 
-    public StaffView(StaffRepository repo){//, StaffEditor editor) {
-        this.repo = repo;
-        //this.editor = editor;
-        this.grid = new Grid<>(Staff.class);
+    private school.newton.sysjs2.grupp3.UAR.StaffEditor staffEditor;
+
+
+    public StaffView(StaffController staffController){
+        this.staffController = staffController;
+        addClassName("staff-view");
         this.filter = new TextField();
-        this.addNewButton = new Button("New employee", VaadinIcon.PLUS.create());
+        setSizeFull();
+        getToolbar();
+        configureGrid();
 
-        HorizontalLayout actions = new HorizontalLayout(filter, addNewButton);
-        add(actions, grid);//, editor);
+        staffEditor = new school.newton.sysjs2.grupp3.UAR.StaffEditor(staffController.findAll());
+        staffEditor.addListener(school.newton.sysjs2.grupp3.UAR.StaffEditor.SaveEvent.class, this::saveStaff);
+        staffEditor.addListener(school.newton.sysjs2.grupp3.UAR.StaffEditor.DeleteEvent.class, this::deleteStaff);
+        staffEditor.addListener(school.newton.sysjs2.grupp3.UAR.StaffEditor.CloseEvent.class, e -> closeEditor());
 
-        grid.setHeight("700px");
-        grid.setColumns("staffid", "firstname", "lastname", "email");
-        grid.getColumnByKey("staffid").setWidth("50px").setFlexGrow(0);
-        filter.setPlaceholder("Filter by last name");
-        filter.setValueChangeMode(ValueChangeMode.EAGER);
-        filter.addValueChangeListener(e -> listEmployee(e.getValue()));
 
-        grid.asSingleSelect().addValueChangeListener((e) -> {
-            //editor.editStaff(e.getValue());
-        });
-        this.addNewButton.addClickListener((e) -> {
-            //editor.editStaff(new Staff());
-        });
-        //editor.setChangeHandler(() -> {
-        //editor.setVisible(false);
-        //this.listEmployee(this.filter.getValue());
-        //});
-        this.listEmployee(null);
+        Div content = new Div(grid, staffEditor);
+        content.addClassName("content");
+        content.setSizeFull();
+
+        add(getToolbar(), content);
+        updateList();
+        closeEditor();
     }
-    void listEmployee(String filterText) {
-        if (StringUtils.isEmpty(filterText)) {
-            this.grid.setItems((Collection<Staff>) repo.findAll());
+
+    private void configureGrid() {
+        grid.setSizeFull();
+        grid.setColumns("firstname", "lastname", "email", "username");
+        grid.getColumns().forEach(col -> col.setAutoWidth(true));
+        grid.asSingleSelect().addValueChangeListener(event ->
+                editStaff(event.getValue()));
+    }
+    public void editStaff(Staff staff) {
+        if (staff == null) {
+            closeEditor();
+        } else {
+            staffEditor.setStaff(staff);
+            staffEditor.setVisible(true);
+            addClassName("editing");
         }
-        else {
-            grid.setItems(repo.findByLastnameStartsWithIgnoreCase(filterText));
-        }
+    }
+
+    private void saveStaff(school.newton.sysjs2.grupp3.UAR.StaffEditor.SaveEvent event) {
+        staffController.save(event.getStaff());
+        updateList();
+        closeEditor();
+    }
+
+    private void deleteStaff(school.newton.sysjs2.grupp3.UAR.StaffEditor.DeleteEvent event) {
+        staffController.delete(event.getStaff());
+        updateList();
+        closeEditor();
+    }
+
+    private void closeEditor() {
+        staffEditor.setStaff(null);
+        staffEditor.setVisible(false);
+        removeClassName("editing");
+    }
+
+    private HorizontalLayout getToolbar() {
+        filter.setPlaceholder("Filter by name...");
+        filter.setClearButtonVisible(true);
+        filter.setValueChangeMode(ValueChangeMode.LAZY);
+        filter.addValueChangeListener(e -> updateList());
+
+        Button addNewStaffButton = new Button("Add new employee", click -> addStaff());
+
+        HorizontalLayout toolbar = new HorizontalLayout(filter, addNewStaffButton);
+        toolbar.addClassName("toolbar");
+        return toolbar;
+    }
+
+    void addStaff() {
+        grid.asSingleSelect().clear();
+        editStaff(new Staff());
+    }
+    private void updateList() {
+        grid.setItems(staffController.findAll(filter.getValue()));
     }
 }
+

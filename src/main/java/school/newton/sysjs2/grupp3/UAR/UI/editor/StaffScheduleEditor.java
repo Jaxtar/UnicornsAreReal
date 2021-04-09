@@ -15,13 +15,13 @@ import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
 import org.springframework.beans.factory.annotation.Autowired;
 import school.newton.sysjs2.grupp3.UAR.model.StaffSchedule;
-import school.newton.sysjs2.grupp3.UAR.repository.StaffScheduleRepository;
+//import school.newton.sysjs2.grupp3.UAR.repository.StaffScheduleRepository;
 
 
 @SpringComponent
 @UIScope
 public class StaffScheduleEditor extends VerticalLayout implements KeyNotifier {
-
+/**
     private final StaffScheduleRepository repository;
     private StaffSchedule staffSchedule;
 
@@ -101,7 +101,7 @@ public class StaffScheduleEditor extends VerticalLayout implements KeyNotifier {
 
     public void setChangeHandler(school.newton.sysjs2.grupp3.UAR.StaffScheduleEditor.ChangeHandler h){
         changeHandler = h;
-    }
+    }*/
 }
 
 
