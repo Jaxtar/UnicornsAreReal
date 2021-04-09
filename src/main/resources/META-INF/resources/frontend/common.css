@@ -22,4 +22,12 @@
     .list-view.editing .movies-grid {
         display: none;
    }
+
+.name{
+    font-size:xx-large;
+}
+
+.header{
+    font-size: xx-large;
+
 }
