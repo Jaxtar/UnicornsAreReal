@@ -1,31 +1,28 @@
-package school.newton.sysjs2.grupp3.UAR;
+package school.newton.sysjs2.grupp3.UAR.UI.editor;
 
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.Key;
-import com.vaadin.flow.component.KeyNotifier;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.shared.Registration;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
-import org.springframework.beans.factory.annotation.Autowired;
 import school.newton.sysjs2.grupp3.UAR.model.Staff;
-import school.newton.sysjs2.grupp3.UAR.repository.StaffRepository;
+
 
 import java.util.List;
 
 
 @SpringComponent
 @UIScope
-public class StaffEditor extends VerticalLayout implements KeyNotifier {
-
+public class StaffEditor extends FormLayout {
     private Staff staff;
 
     TextField firstname = new TextField("First name");
@@ -34,11 +31,13 @@ public class StaffEditor extends VerticalLayout implements KeyNotifier {
     TextField username = new TextField("Username");
     TextField password = new TextField("Password");
 
+    Binder<Staff> binder = new BeanValidationBinder<>(Staff.class);
+
+
     Button save = new Button("Save");
     Button delete = new Button("Delete");
     Button close = new Button("Cancel");
 
-    Binder<Staff> binder = new Binder<>(Staff.class);
 
     public StaffEditor(List<Staff> staff){
         addClassName("Staff-editor");
@@ -46,11 +45,6 @@ public class StaffEditor extends VerticalLayout implements KeyNotifier {
 
         add(firstname, lastname, email, username, password, createButtonsLayout());
 
-    }
-
-    public void setStaff(Staff staff) {
-        this.staff = staff;
-        binder.readBean(staff);
     }
 
     private HorizontalLayout createButtonsLayout() {
@@ -61,7 +55,7 @@ public class StaffEditor extends VerticalLayout implements KeyNotifier {
         save.addClickShortcut(Key.ENTER);
         close.addClickShortcut(Key.ESCAPE);
 
-        save.addClickListener(click -> validateAndSave(staff));
+        save.addClickListener(click -> validateAndSave());
         delete.addClickListener(click -> fireEvent(new DeleteEvent(this, staff)));
         close.addClickListener(click -> fireEvent(new CloseEvent(this)));
 
@@ -70,9 +64,13 @@ public class StaffEditor extends VerticalLayout implements KeyNotifier {
         return new HorizontalLayout(save, delete, close);
     }
 
-    private void validateAndSave(Staff staff) {
+    public void setStaff(Staff staff) {
+        this.staff = staff;
+        binder.readBean(staff);
+    }
+
+    private void validateAndSave() {
         try {
-            this.staff = staff;
             binder.writeBean(staff);
             fireEvent(new SaveEvent(this, staff));
         } catch (ValidationException e) {

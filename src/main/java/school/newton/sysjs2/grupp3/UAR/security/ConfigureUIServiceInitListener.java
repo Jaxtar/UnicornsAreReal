@@ -5,7 +5,7 @@ import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.server.ServiceInitEvent;
 import com.vaadin.flow.server.VaadinServiceInitListener;
 import org.springframework.stereotype.Component;
-import school.newton.sysjs2.grupp3.UAR.StaffLoginView;
+import school.newton.sysjs2.grupp3.UAR.UI.views.StaffLoginView;
 
 @Component
 public class ConfigureUIServiceInitListener implements VaadinServiceInitListener {

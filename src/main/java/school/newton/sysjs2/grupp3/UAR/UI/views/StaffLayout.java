@@ -1,4 +1,4 @@
-package school.newton.sysjs2.grupp3.UAR;
+package school.newton.sysjs2.grupp3.UAR.UI.views;
 
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
@@ -20,7 +20,7 @@ public class StaffLayout extends AppLayout {
         H1 logo = new H1("Unicorn Are Real / Staff Area");
         logo.addClassName("logo");
 
-        HorizontalLayout header = new HorizontalLayout(new DrawerToggle(), logo);//, logout);
+        HorizontalLayout header = new HorizontalLayout(new DrawerToggle(), logo);
         header.expand(logo);
         header.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
         header.setWidth("100%");
