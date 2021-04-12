@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.sql.Time;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 public class StaffSchedule {
