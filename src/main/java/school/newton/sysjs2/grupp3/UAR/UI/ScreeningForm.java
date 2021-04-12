@@ -1,0 +1,108 @@
+package school.newton.sysjs2.grupp3.UAR.UI;
+
+import com.vaadin.flow.component.ComponentEvent;
+import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.Key;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.textfield.IntegerField;
+import com.vaadin.flow.component.timepicker.TimePicker;
+import com.vaadin.flow.data.binder.BeanValidationBinder;
+import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.shared.Registration;
+import school.newton.sysjs2.grupp3.UAR.backend.model.Screening;
+
+public class ScreeningForm extends FormLayout {
+
+    IntegerField _salonid = new IntegerField("Salon");
+    DatePicker date = new DatePicker("Screening");
+    //TimePicker start_time = new TimePicker("Time");
+
+    Button save = new Button("Save");
+    Button delete = new Button("Delete");
+    Button close = new Button("Cancel");
+
+    Binder<Screening> screeningBinder = new BeanValidationBinder<>(Screening.class);
+
+    public ScreeningForm(Iterable<Screening> screenings) {
+        addClassName("movie-form");
+
+        screeningBinder.forField(date)  //myForm.getMyDateField()
+                .withConverter(new SqlDateToLocalDateConverter())
+                .bind(Screening::getDate, Screening::setDate);
+
+        screeningBinder.bindInstanceFields(this);
+
+        add(_salonid, date, createButtonsLayout());
+    }
+
+    private HorizontalLayout createButtonsLayout() {
+        save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        delete.addThemeVariants(ButtonVariant.LUMO_ERROR);
+        close.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+
+        save.addClickShortcut(Key.ENTER);
+        close.addClickShortcut(Key.ESCAPE);
+
+        save.addClickListener(click -> validateAndSave());
+        delete.addClickListener(click -> fireEvent(new ScreeningForm.DeleteEvent(this, screeningBinder.getBean())));
+        close.addClickListener(click -> fireEvent(new ScreeningForm.CloseEvent(this)));
+
+        screeningBinder.addStatusChangeListener(evt -> save.setEnabled(screeningBinder.isValid()));
+
+        return new HorizontalLayout(save, delete, close);
+    }
+
+    public void setScreening(Screening screening) {
+        screeningBinder.setBean(screening);
+    }
+
+    private void validateAndSave() {
+        if (screeningBinder.isValid()) {
+            fireEvent(new ScreeningForm.SaveEvent(this, screeningBinder.getBean()));
+        }
+    }
+
+    // Events
+    public static abstract class ScreeningFormEvent extends ComponentEvent<ScreeningForm> {
+        private Screening screening;
+
+        protected ScreeningFormEvent(ScreeningForm source, Screening screening) {
+            super(source, false);
+            this.screening = screening;
+        }
+
+        public Screening getScreening() {
+            return screening;
+        }
+    }
+
+    public static class SaveEvent extends ScreeningForm.ScreeningFormEvent {
+        SaveEvent(ScreeningForm source, Screening screening) {
+
+            super(source, screening);
+        }
+    }
+
+    public static class DeleteEvent extends ScreeningForm.ScreeningFormEvent {
+        DeleteEvent(ScreeningForm source, Screening screening) {
+            super(source, screening);
+        }
+
+    }
+
+    public static class CloseEvent extends ScreeningForm.ScreeningFormEvent {
+        CloseEvent(ScreeningForm source) {
+            super(source, null);
+        }
+    }
+
+    public <T extends ComponentEvent<?>> Registration addListener(Class<T> eventType,
+                                                                  ComponentEventListener<T> listener) {
+        return getEventBus().addListener(eventType, listener);
+    }
+}

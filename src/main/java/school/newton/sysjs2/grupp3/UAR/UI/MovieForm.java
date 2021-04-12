@@ -4,25 +4,17 @@ import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.datetimepicker.DateTimePicker;
-import com.vaadin.flow.component.textfield.TextArea;
-import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.datetimepicker.DateTimePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.textfield.TextArea;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.shared.Registration;
-import school.newton.sysjs2.grupp3.UAR.backend.controller.ScreeningController;
 import school.newton.sysjs2.grupp3.UAR.backend.model.Movie;
-import school.newton.sysjs2.grupp3.UAR.backend.model.Screening;
 
-import java.sql.Date;
-import java.sql.Time;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 
 public class MovieForm extends FormLayout {
@@ -31,10 +23,6 @@ public class MovieForm extends FormLayout {
     TextField agerating = new TextField("Agerating");
     TextArea description = new TextArea("Description");
     DateTimePicker screening = new DateTimePicker("Screening");
-
-    LocalDate today = LocalDate.now();
-    LocalDateTime min = LocalDateTime.of(today, LocalTime.parse("10:00"));
-    LocalDateTime max = LocalDateTime.of(today.plusWeeks(2), LocalTime.parse("18:00"));
 
     Button save = new Button("Save");
     Button delete = new Button("Delete");
@@ -46,18 +34,17 @@ public class MovieForm extends FormLayout {
         addClassName("movie-form");
 
         movieBinder.bindInstanceFields(this);
-        screening.setStep(Duration.ofMinutes(120));
-        screening.setMax(max);
-        screening.setMin(min);
 
         add(title, agerating, screening, description,
 
         createButtonsLayout());
     }
 
+
     public void setMovie (Movie movie){
         movieBinder.setBean(movie);
     }
+
     private HorizontalLayout createButtonsLayout() {
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         delete.addThemeVariants(ButtonVariant.LUMO_ERROR);

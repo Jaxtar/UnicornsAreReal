@@ -4,8 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.sql.Time;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 public class Screening {
@@ -13,12 +16,20 @@ public class Screening {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer screeningid;
 
+    @NotNull
+    @NotEmpty
     public Integer _movieid;
 
+    @NotNull
+    @NotEmpty
     public Integer _salonid;
 
-    public Date date;
+    @NotNull
+    @NotEmpty
+    public Date date = Date.valueOf(LocalDate.now());
 
+    @NotNull
+    @NotEmpty
     public Time start_time;
 
     public Time end_time;
@@ -28,6 +39,7 @@ public class Screening {
                      Time end_time){
         this.screeningid = screeningid;
         this._movieid = _movieid;
+        this._salonid = _salonid;
         this.date = date;
         this.start_time = start_time;
         this.end_time = end_time;
@@ -35,6 +47,7 @@ public class Screening {
 
     public Screening(){
     }
+
 
     public Integer getScreeningid() {
         return screeningid;

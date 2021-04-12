@@ -1,6 +1,7 @@
 package school.newton.sysjs2.grupp3.UAR.UI.views;
 
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
@@ -12,9 +13,13 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 import school.newton.sysjs2.grupp3.UAR.UI.MovieForm;
 import school.newton.sysjs2.grupp3.UAR.UI.Navbar;
+import school.newton.sysjs2.grupp3.UAR.UI.ScreeningForm;
 import school.newton.sysjs2.grupp3.UAR.backend.controller.MovieController;
+import school.newton.sysjs2.grupp3.UAR.backend.controller.ScreeningController;
 import school.newton.sysjs2.grupp3.UAR.backend.model.Movie;
+import school.newton.sysjs2.grupp3.UAR.backend.model.Screening;
 import school.newton.sysjs2.grupp3.UAR.backend.repository.MovieRepository;
+import school.newton.sysjs2.grupp3.UAR.backend.repository.ScreeningRepository;
 
 
 @Route(value="/movies", layout= Navbar.class)
@@ -23,16 +28,17 @@ public class MoviesView extends VerticalLayout {
 
     Grid<Movie> grid = new Grid<>(Movie.class);
     private MovieController movieController;
+    private MovieRepository movieRepository;
     private TextField filter;
-    private MovieRepository repository;
 
     private MovieForm movieForm;
 
-    public MoviesView(MovieController movieController, MovieRepository repository){
-        this.movieController = movieController;
+    public MoviesView(MovieController movieController,
+                      MovieRepository movieRepository){
         addClassName("list-view");
+        this.movieController = movieController;
+        this.movieRepository = movieRepository;
         this.filter = new TextField();
-        this.repository = repository;
         setSizeFull();
         getToolbar();
         configureGrid();
@@ -93,13 +99,15 @@ public class MoviesView extends VerticalLayout {
         filter.setValueChangeMode(ValueChangeMode.LAZY);
         filter.addValueChangeListener(e -> updateList());
 
-       Button addNewMovieButton = new Button("Add new movie", click -> addMovie());
+       Button addNewMovieButton = new Button("Add Movie", click -> addMovie());
 
-       HorizontalLayout toolbar = new HorizontalLayout(filter, addNewMovieButton);
+       Button addNewScreeningButton = new Button("Screenings");
+        addNewScreeningButton.addClickListener(e -> UI.getCurrent().navigate(ScreeningsView.class));
+
+       HorizontalLayout toolbar = new HorizontalLayout(filter, addNewMovieButton, addNewScreeningButton);
        toolbar.addClassName("toolbar");
 
        return toolbar;
-
     }
 
     private void addMovie() {
