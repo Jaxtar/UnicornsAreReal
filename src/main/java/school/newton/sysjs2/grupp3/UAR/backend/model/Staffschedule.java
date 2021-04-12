@@ -10,7 +10,7 @@ import java.sql.Time;
 import java.sql.Date;
 
 @Entity
-public class StaffSchedule {
+public class Staffschedule {
 
 
 
