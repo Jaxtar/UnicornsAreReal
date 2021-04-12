@@ -67,6 +67,8 @@ public class ScreeningsView extends VerticalLayout {
         grid.setSizeFull();
         grid.setColumns("_movieid", "_salonid", "date", "start_time");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
+
+        grid.asSingleSelect().addValueChangeListener(evt -> editScreening(evt.getValue()));
     }
 
     private HorizontalLayout getToolbar() {
@@ -77,7 +79,7 @@ public class ScreeningsView extends VerticalLayout {
         Button addNewMovieButton = new Button("MovieList");
         addNewMovieButton.addClickListener(e -> UI.getCurrent().navigate(MoviesView.class));
 
-        Button addNewScreeningButton = new Button("Add Screening", click -> addScreening());
+        Button addNewScreeningButton = new Button("Add New Screening", click -> addScreening());
 
         HorizontalLayout toolbar = new HorizontalLayout(filter, addNewMovieButton, addNewScreeningButton);
         toolbar.addClassName("toolbar");

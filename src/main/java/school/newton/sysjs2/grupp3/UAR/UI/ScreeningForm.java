@@ -18,9 +18,12 @@ import school.newton.sysjs2.grupp3.UAR.backend.model.Screening;
 
 public class ScreeningForm extends FormLayout {
 
-    IntegerField _salonid = new IntegerField("Salon");
-    DatePicker date = new DatePicker("Screening");
-    //TimePicker start_time = new TimePicker("Time");
+    private Screening screening;
+
+    //IntegerField _salonid = new IntegerField("Salon");
+    //IntegerField _movieid = new IntegerField("Movie");
+    DatePicker date = new DatePicker("Date");
+    TimePicker start_time = new TimePicker("Time");
 
     Button save = new Button("Save");
     Button delete = new Button("Delete");
@@ -31,13 +34,17 @@ public class ScreeningForm extends FormLayout {
     public ScreeningForm(Iterable<Screening> screenings) {
         addClassName("movie-form");
 
-        screeningBinder.forField(date)  //myForm.getMyDateField()
+        screeningBinder.forField(date)
                 .withConverter(new SqlDateToLocalDateConverter())
                 .bind(Screening::getDate, Screening::setDate);
 
+        screeningBinder.forField(start_time)
+                .withConverter(new SqlTimeToLocalTimeConverter())
+                .bind(Screening::getStart_time, Screening::setStart_time);
+
         screeningBinder.bindInstanceFields(this);
 
-        add(_salonid, date, createButtonsLayout());
+        add(date, start_time, createButtonsLayout());
     }
 
     private HorizontalLayout createButtonsLayout() {
@@ -58,6 +65,7 @@ public class ScreeningForm extends FormLayout {
     }
 
     public void setScreening(Screening screening) {
+        this.screening = screening;
         screeningBinder.setBean(screening);
     }
 

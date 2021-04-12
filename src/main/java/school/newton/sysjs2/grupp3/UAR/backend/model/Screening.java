@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import java.sql.Time;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 public class Screening {
@@ -30,7 +31,8 @@ public class Screening {
 
     @NotNull
     @NotEmpty
-    public Time start_time;
+    public Time start_time = Time.valueOf(LocalTime.now());
+
 
     public Time end_time;
 
