@@ -1,15 +1,11 @@
 package school.newton.sysjs2.grupp3.UAR.UI.views;
 
-import java.sql.Time;
-import java.time.LocalDate;
-
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.data.provider.ArrayUpdater.Update;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
@@ -20,7 +16,6 @@ import school.newton.sysjs2.grupp3.UAR.backend.controller.SalonController;
 import school.newton.sysjs2.grupp3.UAR.backend.controller.ScreeningController;
 import school.newton.sysjs2.grupp3.UAR.backend.model.Booking;
 import school.newton.sysjs2.grupp3.UAR.backend.model.Movie;
-import school.newton.sysjs2.grupp3.UAR.backend.model.Salon;
 import school.newton.sysjs2.grupp3.UAR.backend.model.Screening;
 
 @Route(value="/booking", layout = Navbar.class)
