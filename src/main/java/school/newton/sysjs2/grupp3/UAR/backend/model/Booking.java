@@ -17,6 +17,11 @@ public class Booking {
 
     public Booking(){}
 
+    public Booking(Integer screeningID, Integer seatID){
+        this._screeningid = screeningID;
+        this._seatid = seatID;
+    }
+
     public Integer getBookingid() {
         return bookingid;
     }
