@@ -70,8 +70,9 @@ public class ScreeningsView extends VerticalLayout {
     }
 
     private HorizontalLayout getToolbar() {
-        filter.setPlaceholder("Filter by title...");
+        filter.setValue("Filter by title...");
         filter.setClearButtonVisible(false);
+        filter.setEnabled(false);
 
         Button addNewMovieButton = new Button("MovieList");
         addNewMovieButton.addClickListener(e -> UI.getCurrent().navigate(MoviesView.class));
