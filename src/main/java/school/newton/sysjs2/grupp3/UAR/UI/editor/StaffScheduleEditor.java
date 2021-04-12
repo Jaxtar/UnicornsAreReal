@@ -1,20 +1,22 @@
-package school.newton.sysjs2.grupp3.UAR;
+package school.newton.sysjs2.grupp3.UAR.UI.editor;
 
 
-import com.vaadin.flow.component.*;
+import com.vaadin.flow.component.ComponentEvent;
+import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.data.binder.BeanValidationBinder;
-import com.vaadin.flow.data.binder.Binder;
-import com.vaadin.flow.data.binder.ValidationException;
+import com.vaadin.flow.component.timepicker.TimePicker;
+import com.vaadin.flow.data.binder.*;
 import com.vaadin.flow.shared.Registration;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
-import school.newton.sysjs2.grupp3.UAR.model.Staffschedule;
+import school.newton.sysjs2.grupp3.UAR.backend.model.Staffschedule;
 
 import java.util.List;
 
@@ -25,22 +27,18 @@ public class StaffScheduleEditor extends FormLayout {
     private Staffschedule staffschedule;
 
 
-    /**
-     * DatePicker date = new DatePicker("Date");
-     * TimePicker startTime = new TimePicker("Start Time");
-     * TimePicker endTime = new TimePicker("End Time");
-     */
+    DatePicker date = new DatePicker("Date");
+    TimePicker startTime = new TimePicker("Start Time");
+    TimePicker endTime = new TimePicker("End Time");
 
-
-    //TODO date- start time - end time e capire perchè non vedo nulla nella tabella
-
-
+    //TextField staffId = new TextField("Staff ID");
     TextField firstname = new TextField("First name");
     TextField lastname = new TextField("Last name");
     ComboBox<Staffschedule.Workarea> workarea = new ComboBox<>("Work Area");
-    TextField theaterid = new TextField("Theater ID");
+    //TextField theaterid = new TextField("Theater ID");
 
     Binder<Staffschedule> binder = new BeanValidationBinder<>(Staffschedule.class);
+
 
     Button save = new Button("Save");
     Button delete = new Button("Delete");
@@ -49,16 +47,33 @@ public class StaffScheduleEditor extends FormLayout {
 
     public StaffScheduleEditor(List<Staffschedule> staffschedule) {
         addClassName("Staffschedule-editor");
+
+
+        binder.forField(date)
+                .withConverter(new SqlDateToLocalDateConverter())
+                .bind(Staffschedule::getDate, Staffschedule::setDate);
+
+        binder.forField(startTime)
+                .withConverter(new SqlTimeToLocalTimeConverter())
+                .bind(Staffschedule::getStart_time, Staffschedule::setStart_time);
+
+        binder.forField(endTime)
+                .withConverter(new SqlTimeToLocalTimeConverter())
+                .bind(Staffschedule::getEnd_time, Staffschedule::setEnd_time);
+
+
+
         binder.bindInstanceFields(this);
 
-        /** binder.bindInstanceFields(date.getLocale());
-         binder.bindInstanceFields(startTime.getLocale());
-         binder.bindInstanceFields(endTime.getLocale());*/
 
         workarea.setItems(Staffschedule.Workarea.values());
-        add(/**date, startTime, endTime, */firstname, lastname, workarea, theaterid, createButtonsLayout());
+        add(date, startTime, endTime, firstname, lastname, workarea, createButtonsLayout());
 
     }
+
+
+
+
 
     private HorizontalLayout createButtonsLayout() {
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
@@ -128,6 +143,4 @@ public class StaffScheduleEditor extends FormLayout {
     public <T extends ComponentEvent<?>> Registration addListener(Class<T> eventType,
                                                                   ComponentEventListener<T> listener) {
         return getEventBus().addListener(eventType, listener);
-    }
-
-}
+    }}

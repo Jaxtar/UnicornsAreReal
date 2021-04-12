@@ -10,7 +10,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import school.newton.sysjs2.grupp3.UAR.UI.editor.StaffScheduleEditor;
+import school.newton.sysjs2.grupp3.UAR.UI.StaffScheduleEditor;
 import school.newton.sysjs2.grupp3.UAR.backend.controller.StaffScheduleController;
 import school.newton.sysjs2.grupp3.UAR.backend.model.Staffschedule;
 import school.newton.sysjs2.grupp3.UAR.backend.repository.StaffScheduleRepository;
@@ -19,9 +19,8 @@ import school.newton.sysjs2.grupp3.UAR.backend.repository.StaffScheduleRepositor
 @Route(
         value = "staff/schedule",
         layout = StaffLayout.class)
-@PageTitle("Staff - Schedule - Unicorns Are Real")
+@PageTitle("Staff - Schedule - Unicorns Are Real!")
 @CssImport("./common.css")
-
 public class StaffScheduleView extends VerticalLayout {
     private StaffScheduleController staffScheduleController;
     private StaffScheduleRepository staffScheduleRepository;
@@ -54,7 +53,7 @@ public class StaffScheduleView extends VerticalLayout {
     private void configureGrid() {
         grid.addClassName("contact-grid");
         grid.setSizeFull();
-        grid.setColumns("staffscheduleid",/**"date", "start_time", "end_time",*/ "_staffid", "firstname", "lastname", "workarea", "_theatreid");
+        grid.setColumns("staffscheduleid", "date", "start_time", "end_time", "_staffid", "firstname", "lastname", "workarea", "_theatreid");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
         grid.asSingleSelect().addValueChangeListener(event ->
                 editStaffSchedule(event.getValue()));
