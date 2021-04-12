@@ -10,5 +10,5 @@ import java.util.List;
 public interface MovieRepository extends CrudRepository<Movie, Integer> {
    List<Movie> findAll();
    List<Movie> findByTitle(String searchTerm);
-   List<Movie> findByAgerating(String searchTerm);
+   // List<Movie> findByAgerating(String searchTerm);
 }

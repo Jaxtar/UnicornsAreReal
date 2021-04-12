@@ -18,6 +18,8 @@ public class Screening {
     public Time start_time;
     public Time end_time;
 
+
+
     public Integer getScreeningid() {
         return screeningid;
     }

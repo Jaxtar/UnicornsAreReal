@@ -4,6 +4,7 @@ import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.datetimepicker.DateTimePicker;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -14,6 +15,10 @@ import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.shared.Registration;
 import school.newton.sysjs2.grupp3.UAR.backend.model.Movie;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 public class MovieForm extends FormLayout {
@@ -21,6 +26,11 @@ public class MovieForm extends FormLayout {
     TextField title = new TextField("Title");
     TextField agerating = new TextField("Agerating");
     TextArea description = new TextArea("Description");
+    DateTimePicker screening = new DateTimePicker("Screening");
+
+    LocalDate today = LocalDate.now();
+    LocalDateTime min = LocalDateTime.of(today, LocalTime.parse("10:00"));
+    LocalDateTime max = LocalDateTime.of(today.plusWeeks(2), LocalTime.parse("18:00"));
 
     Button save = new Button("Save");
     Button delete = new Button("Delete");
@@ -32,8 +42,12 @@ public class MovieForm extends FormLayout {
         addClassName("movie-form");
 
         binder.bindInstanceFields(this);
+        screening.setStep(Duration.ofMinutes(120));
+        screening.setMin(min);
+        screening.setMax(max);
 
-        add(title, agerating, description,
+        add(title, agerating, screening, description,
+
         createButtonsLayout());
     }
 

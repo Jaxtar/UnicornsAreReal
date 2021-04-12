@@ -1,4 +1,4 @@
-package school.newton.sysjs2.grupp3.UAR.UI;
+package school.newton.sysjs2.grupp3.UAR.UI.views;
 
 
 import com.vaadin.flow.component.button.Button;
@@ -10,12 +10,14 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
+import school.newton.sysjs2.grupp3.UAR.UI.MovieForm;
+import school.newton.sysjs2.grupp3.UAR.UI.Navbar;
 import school.newton.sysjs2.grupp3.UAR.backend.controller.MovieController;
 import school.newton.sysjs2.grupp3.UAR.backend.model.Movie;
 import school.newton.sysjs2.grupp3.UAR.backend.repository.MovieRepository;
 
 
-@Route(value="/movies", layout=Navbar.class)
+@Route(value="/movies", layout= Navbar.class)
 @CssImport("./common.css")
 public class MoviesView extends VerticalLayout {
 
