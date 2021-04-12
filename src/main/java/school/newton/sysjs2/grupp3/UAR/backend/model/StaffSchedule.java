@@ -10,7 +10,7 @@ import java.sql.Time;
 import java.sql.Date;
 
 @Entity
-public class Staffschedule {
+public class StaffSchedule {
 
 
 
@@ -50,7 +50,7 @@ public class Staffschedule {
     @NotEmpty
     private Integer _theatreid;
 
-    public Staffschedule(Date date, Time start_time, Time end_time, Integer _staffid, String firstname, String lastname, String workarea, Integer _theatreid ){
+    public StaffSchedule(Date date, Time start_time, Time end_time, Integer _staffid, String firstname, String lastname, String workarea, Integer _theatreid ){
         this.date = date;
         this.start_time = start_time;
         this.end_time = end_time;
@@ -61,7 +61,7 @@ public class Staffschedule {
         this._theatreid = _theatreid;
     }
 
-    public Staffschedule(){
+    public StaffSchedule(){
 
     }
 
