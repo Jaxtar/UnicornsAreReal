@@ -16,6 +16,8 @@ import com.vaadin.flow.data.binder.*;
 import com.vaadin.flow.shared.Registration;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
+import school.newton.sysjs2.grupp3.UAR.UI.converter.SqlDateToLocalDateConverter;
+import school.newton.sysjs2.grupp3.UAR.UI.converter.SqlTimeToLocalTimeConverter;
 import school.newton.sysjs2.grupp3.UAR.backend.model.Staffschedule;
 
 import java.util.List;
@@ -143,4 +145,5 @@ public class StaffScheduleEditor extends FormLayout {
     public <T extends ComponentEvent<?>> Registration addListener(Class<T> eventType,
                                                                   ComponentEventListener<T> listener) {
         return getEventBus().addListener(eventType, listener);
-    }}
+    }
+}

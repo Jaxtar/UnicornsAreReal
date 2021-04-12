@@ -11,12 +11,14 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import school.newton.sysjs2.grupp3.UAR.UI.editor.StaffEditor;
-import school.newton.sysjs2.grupp3.UAR.model.Staff;
+import school.newton.sysjs2.grupp3.UAR.backend.controller.StaffController;
+import school.newton.sysjs2.grupp3.UAR.backend.model.Staff;
+import school.newton.sysjs2.grupp3.UAR.backend.repository.StaffRepository;
 
 
 @Route(
         value = "staff/info",
-        layout = school.newton.sysjs2.grupp3.UAR.StaffLayout.class)
+        layout = StaffLayout.class)
 @PageTitle("Staff - Info - Unicorns Are Real")
 @CssImport("./common.css")
 public class StaffView extends VerticalLayout {

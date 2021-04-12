@@ -1,10 +1,10 @@
-package school.newton.sysjs2.grupp3.UAR.controller;
+package school.newton.sysjs2.grupp3.UAR.backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import school.newton.sysjs2.grupp3.UAR.model.Theatre;
-import school.newton.sysjs2.grupp3.UAR.repository.TheatreRepository;
+import school.newton.sysjs2.grupp3.UAR.backend.model.Theatre;
+import school.newton.sysjs2.grupp3.UAR.backend.repository.TheatreRepository;
 
 
 @Controller
