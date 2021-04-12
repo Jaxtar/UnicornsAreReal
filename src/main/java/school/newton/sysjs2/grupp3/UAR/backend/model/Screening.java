@@ -5,20 +5,36 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.sql.Time;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 public class Screening {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer screeningid;
+
     public Integer _movieid;
+
     public Integer _salonid;
+
     public Date date;
+
     public Time start_time;
+
     public Time end_time;
 
+    public Screening(Integer screeningid, Integer _movieid,
+                     Integer _salonid, Date date, Time start_time,
+                     Time end_time){
+        this.screeningid = screeningid;
+        this._movieid = _movieid;
+        this.date = date;
+        this.start_time = start_time;
+        this.end_time = end_time;
+    }
 
+    public Screening(){
+    }
 
     public Integer getScreeningid() {
         return screeningid;

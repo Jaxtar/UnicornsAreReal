@@ -13,8 +13,12 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.shared.Registration;
+import school.newton.sysjs2.grupp3.UAR.backend.controller.ScreeningController;
 import school.newton.sysjs2.grupp3.UAR.backend.model.Movie;
+import school.newton.sysjs2.grupp3.UAR.backend.model.Screening;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -36,15 +40,15 @@ public class MovieForm extends FormLayout {
     Button delete = new Button("Delete");
     Button close = new Button("Cancel");
 
-    Binder<Movie> binder = new BeanValidationBinder<>(Movie.class);
+    Binder<Movie> movieBinder = new BeanValidationBinder<>(Movie.class);
 
     public MovieForm(List<Movie> movies) {
         addClassName("movie-form");
 
-        binder.bindInstanceFields(this);
+        movieBinder.bindInstanceFields(this);
         screening.setStep(Duration.ofMinutes(120));
-        screening.setMin(min);
         screening.setMax(max);
+        screening.setMin(min);
 
         add(title, agerating, screening, description,
 
@@ -52,9 +56,8 @@ public class MovieForm extends FormLayout {
     }
 
     public void setMovie (Movie movie){
-        binder.setBean(movie);
+        movieBinder.setBean(movie);
     }
-
     private HorizontalLayout createButtonsLayout() {
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         delete.addThemeVariants(ButtonVariant.LUMO_ERROR);
@@ -64,17 +67,17 @@ public class MovieForm extends FormLayout {
         close.addClickShortcut(Key.ESCAPE);
 
         save.addClickListener(click -> validateAndSave());
-        delete.addClickListener(click -> fireEvent(new DeleteEvent(this, binder.getBean())));
+        delete.addClickListener(click -> fireEvent(new DeleteEvent(this, movieBinder.getBean())));
         close.addClickListener(click -> fireEvent(new CloseEvent(this)));
 
-        binder.addStatusChangeListener(evt -> save.setEnabled(binder.isValid()));
+        movieBinder.addStatusChangeListener(evt -> save.setEnabled(movieBinder.isValid()));
 
         return new HorizontalLayout(save, delete, close);
     }
 
     private void validateAndSave() {
-        if(binder.isValid()){
-            fireEvent(new SaveEvent(this, binder.getBean()));
+        if(movieBinder.isValid()){
+            fireEvent(new SaveEvent(this, movieBinder.getBean()));
         }
     }
 

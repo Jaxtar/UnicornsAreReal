@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ScreeningRepository extends CrudRepository<Screening, Integer> {
     List<Screening> findAll();
-    List<Screening> findBy_movieid(Integer searchTerm);
+    List<Screening> findBy_movieid(Integer _movieid);
 }
