@@ -2,6 +2,7 @@ package school.newton.sysjs2.grupp3.UAR.UI;
 
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.ItemLabelGenerator;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -13,17 +14,23 @@ import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.shared.Registration;
+import school.newton.sysjs2.grupp3.UAR.backend.controller.MovieController;
+import school.newton.sysjs2.grupp3.UAR.backend.model.Movie;
 import school.newton.sysjs2.grupp3.UAR.backend.model.Screening;
+import school.newton.sysjs2.grupp3.UAR.backend.repository.MovieRepository;
 
 public class ScreeningForm extends FormLayout {
 
     private Screening screening;
 
-    //IntegerField _salonid = new IntegerField("Salon");
-    //IntegerField _movieid = new IntegerField("Movie");
+    IntegerField screeningid = new IntegerField("Screening");
+    IntegerField _salonid = new IntegerField("Salon");
+    IntegerField _movieid = new IntegerField("Movie");
     DatePicker date = new DatePicker("Date");
-    TimePicker start_time = new TimePicker("Time");
+    TimePicker start_time = new TimePicker("StartTime");
+    TimePicker end_time = new TimePicker("EndTime");
 
     Button save = new Button("Save");
     Button delete = new Button("Delete");
@@ -42,9 +49,16 @@ public class ScreeningForm extends FormLayout {
                 .withConverter(new SqlTimeToLocalTimeConverter())
                 .bind(Screening::getStart_time, Screening::setStart_time);
 
+        screeningBinder.forField(end_time)
+                .withConverter(new SqlTimeToLocalTimeConverter())
+                .bind(Screening::getEnd_time, Screening::setEnd_time);
+
         screeningBinder.bindInstanceFields(this);
 
-        add(date, start_time, createButtonsLayout());
+        screeningid.setReadOnly(true);
+        //_movieid.setReadOnly(true);
+
+        add(screeningid, _movieid, _salonid, date, start_time, end_time, createButtonsLayout());
     }
 
     private HorizontalLayout createButtonsLayout() {
@@ -56,10 +70,11 @@ public class ScreeningForm extends FormLayout {
         close.addClickShortcut(Key.ESCAPE);
 
         save.addClickListener(click -> validateAndSave());
-        delete.addClickListener(click -> fireEvent(new ScreeningForm.DeleteEvent(this, screeningBinder.getBean())));
-        close.addClickListener(click -> fireEvent(new ScreeningForm.CloseEvent(this)));
+        delete.addClickListener(click -> fireEvent(new DeleteEvent(this, screeningBinder.getBean())));
+        close.addClickListener(click -> fireEvent(new CloseEvent(this)));
 
-        screeningBinder.addStatusChangeListener(evt -> save.setEnabled(screeningBinder.isValid()));
+        screeningBinder.addStatusChangeListener(evt ->
+                save.setEnabled(screeningBinder.isValid()));
 
         return new HorizontalLayout(save, delete, close);
     }
@@ -70,8 +85,11 @@ public class ScreeningForm extends FormLayout {
     }
 
     private void validateAndSave() {
-        if (screeningBinder.isValid()) {
-            fireEvent(new ScreeningForm.SaveEvent(this, screeningBinder.getBean()));
+        try {
+            screeningBinder.writeBean(screening);
+            fireEvent(new SaveEvent(this, screening));
+        } catch (ValidationException e) {
+            e.printStackTrace();
         }
     }
 

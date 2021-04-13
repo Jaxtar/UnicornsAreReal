@@ -22,7 +22,6 @@ public class MovieForm extends FormLayout {
     TextField title = new TextField("Title");
     TextField agerating = new TextField("Agerating");
     TextArea description = new TextArea("Description");
-    DateTimePicker screening = new DateTimePicker("Screening");
 
     Button save = new Button("Save");
     Button delete = new Button("Delete");
@@ -35,15 +34,11 @@ public class MovieForm extends FormLayout {
 
         movieBinder.bindInstanceFields(this);
 
-        add(title, agerating, screening, description,
+        add(title, agerating, description,
 
         createButtonsLayout());
     }
 
-
-    public void setMovie (Movie movie){
-        movieBinder.setBean(movie);
-    }
 
     private HorizontalLayout createButtonsLayout() {
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
@@ -57,9 +52,14 @@ public class MovieForm extends FormLayout {
         delete.addClickListener(click -> fireEvent(new DeleteEvent(this, movieBinder.getBean())));
         close.addClickListener(click -> fireEvent(new CloseEvent(this)));
 
-        movieBinder.addStatusChangeListener(evt -> save.setEnabled(movieBinder.isValid()));
+        movieBinder.addStatusChangeListener(evt ->
+                save.setEnabled(movieBinder.isValid()));
 
         return new HorizontalLayout(save, delete, close);
+    }
+
+    public void setMovie (Movie movie){
+        movieBinder.setBean(movie);
     }
 
     private void validateAndSave() {

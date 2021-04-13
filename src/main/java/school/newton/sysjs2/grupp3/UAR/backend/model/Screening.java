@@ -13,28 +13,21 @@ import java.time.LocalTime;
 
 @Entity
 public class Screening {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer screeningid;
 
-    @NotNull
-    @NotEmpty
     public Integer _movieid;
 
-    @NotNull
-    @NotEmpty
     public Integer _salonid;
 
-    @NotNull
-    @NotEmpty
     public Date date = Date.valueOf(LocalDate.now());
 
-    @NotNull
-    @NotEmpty
     public Time start_time = Time.valueOf(LocalTime.now());
 
+    public Time end_time = Time.valueOf(LocalTime.now());
 
-    public Time end_time;
 
     public Screening(Integer screeningid, Integer _movieid,
                      Integer _salonid, Date date, Time start_time,
@@ -55,9 +48,7 @@ public class Screening {
         return screeningid;
     }
 
-    public void setScreeningid(Integer screeningid) {
-        this.screeningid = screeningid;
-    }
+    public void setScreeningid(Integer screeningid) {this.screeningid = screeningid;}
 
     public Integer get_movieid() {
         return _movieid;

@@ -37,6 +37,16 @@ public class ScreeningController {
     }
 
     public void delete(Screening screening) {
+        if (screening == null) {
+            LOGGER.log(Level.SEVERE, "Screening is null. Are you sure you have connected your form to the application?");
+            return;
+        }
+        LOGGER.log(Level.SEVERE,
+                "ID: "+ screening.getScreeningid() +
+                        " MovieID: " + screening.get_movieid() +
+                        " SalonID: " + screening.get_salonid() +
+                        " Date: " + screening.getDate() +
+                        " StartTime: " + screening.getStart_time() );
         repository.delete(screening);
     }
 

@@ -21,7 +21,6 @@ import school.newton.sysjs2.grupp3.UAR.backend.model.Screening;
 import school.newton.sysjs2.grupp3.UAR.backend.repository.MovieRepository;
 import school.newton.sysjs2.grupp3.UAR.backend.repository.ScreeningRepository;
 
-
 @Route(value="/movies", layout= Navbar.class)
 @CssImport("./common.css")
 public class MoviesView extends VerticalLayout {
@@ -57,24 +56,35 @@ public class MoviesView extends VerticalLayout {
         closeEditor();
     }
 
-    private void deleteMovie(MovieForm.DeleteEvent evt) {
-        movieController.delete(evt.getMovie());
-        updateList();
-        closeEditor();
-    }
-
-    private void saveMovie(MovieForm.SaveEvent evt) {
-        movieController.save(evt.getMovie());
-        updateList();
-        closeEditor();
-    }
-
     private void configureGrid() {
         grid.setSizeFull();
         grid.setColumns("title", "agerating", "description");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
         grid.asSingleSelect().addValueChangeListener(evt -> editMovie(evt.getValue()));
+    }
+
+    private HorizontalLayout getToolbar() {
+        filter.setPlaceholder("Filter by title...");
+        filter.setClearButtonVisible(true);
+        filter.setValueChangeMode(ValueChangeMode.LAZY);
+        filter.addValueChangeListener(e -> updateList());
+
+        Button addNewMovieButton = new Button("New Movie", click -> addMovie());
+
+        Button addNewScreeningButton = new Button("ScreeningList");
+        addNewScreeningButton.addClickListener(e -> UI.getCurrent().navigate(ScreeningsView.class));
+
+        HorizontalLayout toolbar = new HorizontalLayout(filter, addNewMovieButton, addNewScreeningButton);
+        toolbar.addClassName("toolbar");
+
+        return toolbar;
+    }
+
+    private void closeEditor() {
+        movieForm.setMovie(null);
+        movieForm.setVisible(false);
+        removeClassName("editing");
     }
 
     private void editMovie(Movie movie) {
@@ -87,32 +97,21 @@ public class MoviesView extends VerticalLayout {
         }
     }
 
-    private void closeEditor() {
-        movieForm.setMovie(null);
-        movieForm.setVisible(false);
-        removeClassName("editing");
-    }
-
-    private HorizontalLayout getToolbar() {
-        filter.setPlaceholder("Filter by title...");
-        filter.setClearButtonVisible(true);
-        filter.setValueChangeMode(ValueChangeMode.LAZY);
-        filter.addValueChangeListener(e -> updateList());
-
-       Button addNewMovieButton = new Button("Add Movie", click -> addMovie());
-
-       Button addNewScreeningButton = new Button("Screenings");
-        addNewScreeningButton.addClickListener(e -> UI.getCurrent().navigate(ScreeningsView.class));
-
-       HorizontalLayout toolbar = new HorizontalLayout(filter, addNewMovieButton, addNewScreeningButton);
-       toolbar.addClassName("toolbar");
-
-       return toolbar;
-    }
-
     private void addMovie() {
         grid.asSingleSelect().clear();
         editMovie(new Movie());
+    }
+
+    private void saveMovie(MovieForm.SaveEvent evt) {
+        movieController.save(evt.getMovie());
+        updateList();
+        closeEditor();
+    }
+
+    private void deleteMovie(MovieForm.DeleteEvent evt) {
+        movieController.delete(evt.getMovie());
+        updateList();
+        closeEditor();
     }
 
     private void updateList() {

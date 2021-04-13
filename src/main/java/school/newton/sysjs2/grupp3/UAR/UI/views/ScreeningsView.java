@@ -27,7 +27,6 @@ public class ScreeningsView extends VerticalLayout {
 
     Grid<Screening> grid = new Grid<>(Screening.class);
     ComboBox<Movie> movie = new ComboBox<>("Movies");
-
     private ScreeningController screeningController;
     private ScreeningRepository screeningRepository;
     private MovieController movieController;
@@ -48,13 +47,14 @@ public class ScreeningsView extends VerticalLayout {
 
         movie.setItems(movieController.findAll());
         movie.setItemLabelGenerator(Movie::getTitle);
-        movie.addValueChangeListener(e -> updateScreeningData(e.getValue().getMovieid()));
+        movie.addValueChangeListener(e -> updateList());
         movie.setWidth("25%");
 
         screeningForm = new ScreeningForm(screeningController.getAllScreenings());
         screeningForm.addListener(ScreeningForm.SaveEvent.class,this::saveScreening);
         screeningForm.addListener(ScreeningForm.DeleteEvent.class, this::deleteScreening);
-        screeningForm.addListener(MovieForm.CloseEvent.class, e -> closeEditor());
+        screeningForm.addListener(ScreeningForm.CloseEvent.class, e -> closeEditor());
+        closeEditor();
 
         Div content = new Div(grid, screeningForm);
         content.addClassName("content");
@@ -65,7 +65,7 @@ public class ScreeningsView extends VerticalLayout {
 
     private void configureGrid() {
         grid.setSizeFull();
-        grid.setColumns("_movieid", "_salonid", "date", "start_time");
+        grid.setColumns("_movieid", "_salonid", "date", "start_time", "end_time");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
         grid.asSingleSelect().addValueChangeListener(evt -> editScreening(evt.getValue()));
@@ -79,7 +79,7 @@ public class ScreeningsView extends VerticalLayout {
         Button addNewMovieButton = new Button("MovieList");
         addNewMovieButton.addClickListener(e -> UI.getCurrent().navigate(MoviesView.class));
 
-        Button addNewScreeningButton = new Button("Add New Screening", click -> addScreening());
+        Button addNewScreeningButton = new Button("New Screening", click -> addScreening());
 
         HorizontalLayout toolbar = new HorizontalLayout(filter, addNewMovieButton, addNewScreeningButton);
         toolbar.addClassName("toolbar");
@@ -87,23 +87,10 @@ public class ScreeningsView extends VerticalLayout {
         return toolbar;
     }
 
-    private void deleteScreening(ScreeningForm.DeleteEvent evt) {
-        screeningController.delete(evt.getScreening());
-        //updateScreeningData();
-        updateList();
-        closeEditor();
-    }
-
-    private void saveScreening(ScreeningForm.SaveEvent evt) {
-        screeningController.save(evt.getScreening());
-        //updateScreeningData();
-        updateList();
-        closeEditor();
-    }
-
-    private void addScreening() {
-        grid.asSingleSelect().clear();
-        editScreening(new Screening());
+    private void closeEditor() {
+        screeningForm.setScreening(null);
+        screeningForm.setVisible(false);
+        removeClassName("editing");
     }
 
     private void editScreening(Screening screening) {
@@ -116,17 +103,23 @@ public class ScreeningsView extends VerticalLayout {
         }
     }
 
-    private void closeEditor() {
-        screeningForm.setScreening(null);
-        screeningForm.setVisible(false);
-        removeClassName("editing");
+    private void addScreening() {
+        grid.asSingleSelect().clear();
+        editScreening(new Screening());
     }
 
-    private void updateScreeningData(Integer movieid) {
-        grid.setItems((Collection<Screening>) screeningController.getScreeningsByMovieID(movieid));
+    private void saveScreening(ScreeningForm.SaveEvent evt) {
+        screeningController.save(evt.getScreening());
+        updateList();
+        closeEditor();
+    }
+
+    private void deleteScreening(ScreeningForm.DeleteEvent evt) {
+        screeningController.delete(evt.getScreening());
+        updateList();
+        closeEditor();
     }
 
     private void updateList() {
-        grid.setItems((Collection<Screening>) screeningController.getAllScreenings());
-    }
+        grid.setItems((Collection<Screening>) screeningController.getScreeningsByMovieID(movie.getValue().getMovieid()));    }
 }
