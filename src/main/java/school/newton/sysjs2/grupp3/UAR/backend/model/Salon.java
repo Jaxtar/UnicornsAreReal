@@ -10,9 +10,12 @@ public class Salon {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    public Integer salonid;
-    public Integer numberofseats;
-    public Integer _theatreid;
+
+    private Integer salonid;
+    private Integer numberofseats;
+    private Integer _theatreid;
+
+    public Salon(){}
 
     public Integer getSalonid() {
         return salonid;

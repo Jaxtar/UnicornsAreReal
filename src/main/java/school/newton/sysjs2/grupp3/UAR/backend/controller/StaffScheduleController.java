@@ -2,6 +2,7 @@ package school.newton.sysjs2.grupp3.UAR.backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
 import school.newton.sysjs2.grupp3.UAR.backend.model.Staffschedule;
 import school.newton.sysjs2.grupp3.UAR.backend.repository.StaffScheduleRepository;
 
@@ -20,9 +21,11 @@ public class StaffScheduleController {
         this.repository = repository;
     }
 
-    public List<Staffschedule> findAll() {return repository.findAll();}
 
-    public List<Staffschedule> findAll(String stringFilter){
+    public List<StaffSchedule> findAll() {return repository.findAll();}
+
+    public List<StaffSchedule> findAll(String stringFilter){
+
         if(stringFilter == null || stringFilter.isEmpty()) {
             return repository.findAll();
         }else {
@@ -30,11 +33,13 @@ public class StaffScheduleController {
         }
     }
 
-    public void delete(Staffschedule staffschedule) {
+
+    public void delete(StaffSchedule staffschedule) {
         repository.delete(staffschedule);
     }
 
-    public void save(Staffschedule staffschedule) {
+    public void save(StaffSchedule staffschedule) {
+
         if (staffschedule == null) {
             LOGGER.log(Level.SEVERE,
                     "Schedule is null. Are you sure you have connected your form to the application?");
