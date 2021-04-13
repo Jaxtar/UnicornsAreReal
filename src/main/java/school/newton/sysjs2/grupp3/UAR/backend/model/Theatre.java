@@ -7,6 +7,7 @@ public class Theatre {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Integer theatreid;
     private String theatrename;
 

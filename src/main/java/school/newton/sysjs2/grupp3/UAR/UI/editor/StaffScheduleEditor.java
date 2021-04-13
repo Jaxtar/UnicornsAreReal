@@ -1,107 +1,159 @@
-package school.newton.sysjs2.grupp3.UAR;
+package school.newton.sysjs2.grupp3.UAR.UI.editor;
 
 
+import com.vaadin.flow.component.ComponentEvent;
+import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.Key;
-import com.vaadin.flow.component.KeyModifier;
-import com.vaadin.flow.component.KeyNotifier;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.data.binder.Binder;
-import com.vaadin.flow.data.converter.StringToDateConverter;
+import com.vaadin.flow.component.timepicker.TimePicker;
+import com.vaadin.flow.data.binder.*;
+import com.vaadin.flow.data.converter.Converter;
+import com.vaadin.flow.data.converter.StringToIntegerConverter;
+import com.vaadin.flow.shared.Registration;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
-import org.springframework.beans.factory.annotation.Autowired;
-import school.newton.sysjs2.grupp3.UAR.model.StaffSchedule;
-//import school.newton.sysjs2.grupp3.UAR.repository.StaffScheduleRepository;
+import school.newton.sysjs2.grupp3.UAR.UI.converter.SqlDateToLocalDateConverter;
+import school.newton.sysjs2.grupp3.UAR.UI.converter.SqlTimeToLocalTimeConverter;
+import school.newton.sysjs2.grupp3.UAR.backend.model.Staffschedule;
 
+import javax.script.Bindings;
+import javax.swing.event.ChangeListener;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.List;
 
 @SpringComponent
 @UIScope
-public class StaffScheduleEditor extends VerticalLayout implements KeyNotifier {
-/**
-    private final StaffScheduleRepository repository;
-    private StaffSchedule staffSchedule;
+public class StaffScheduleEditor extends FormLayout {
 
-   public TextField firstname = new TextField("First name");
-    public TextField lastname = new TextField("Last name");
-    public TextField workarea = new TextField("Work Area");
-    public TextField theaterId = new TextField("Theater ID");
+    private Staffschedule staffschedule;
 
-    public Button save;
-    public Button cancel;
-    public Button delete;
-    HorizontalLayout actions;
-    Binder<StaffSchedule> binder;
-    school.newton.sysjs2.grupp3.UAR.StaffScheduleEditor.ChangeHandler changeHandler;
 
-    @Autowired
-    public StaffScheduleEditor(StaffScheduleRepository repository) {
-        this.repository = repository;
-        this.save = new Button("Save", VaadinIcon.CHECK.create());
-        this.cancel = new Button("Cancel");
-        this.delete = new Button("Delete", VaadinIcon.TRASH.create());
-        this.actions = new HorizontalLayout(save, cancel, delete);
-        this.binder = new Binder(StaffSchedule.class);
+    DatePicker date = new DatePicker("Date");
+    TimePicker startTime = new TimePicker("Start Time");
+    TimePicker endTime = new TimePicker("End Time");
+    TextField staffId = new TextField("Staff ID");
+    TextField firstname = new TextField("First name");
+    TextField lastname = new TextField("Last name");
+    ComboBox<Staffschedule.Workarea> workarea = new ComboBox<>("Work Area");
+    TextField theaterid = new TextField("Theater ID");
+
+    Binder<Staffschedule> binder = new BeanValidationBinder<>(Staffschedule.class);
+
+
+    Button save = new Button("Save");
+    Button delete = new Button("Delete");
+    Button close = new Button("Cancel");
+
+
+    public StaffScheduleEditor(List<Staffschedule> staffschedule) {
+        addClassName("Staffschedule-editor");
+
+        binder.forField(staffId)
+               .withConverter(new StringToIntegerConverter(String.valueOf(staffId)))
+                .bind(Staffschedule::get_staffid, Staffschedule::set_staffid);
+
+
+        binder.forField(date)
+                .withConverter(new SqlDateToLocalDateConverter())
+                .bind(Staffschedule::getDate, Staffschedule::setDate);
+
+        binder.forField(startTime)
+                .withConverter(new SqlTimeToLocalTimeConverter())
+                .bind(Staffschedule::getStart_time, Staffschedule::setStart_time);
+
+        binder.forField(endTime)
+                .withConverter(new SqlTimeToLocalTimeConverter())
+                .bind(Staffschedule::getEnd_time, Staffschedule::setEnd_time);
+
+        binder.forField(theaterid)
+                .withConverter(new StringToIntegerConverter(String.valueOf(theaterid)))
+                .bind(Staffschedule::get_theatreid, Staffschedule::set_theatreid);
+
 
         binder.bindInstanceFields(this);
-        this.add(firstname, lastname, workarea, theaterId, actions);
-        this.setSpacing(true);
-        this.save.getElement().getThemeList().add("primary");
-        this.delete.getElement().getThemeList().add("error");
 
-        this.addKeyPressListener(Key.ENTER, (e) -> {
-            this.save();
-        }, new KeyModifier[0]);
-        this.save.addClickListener((e) -> {
-            this.save();
-        });
-        this.delete.addClickListener((e) -> {
-            this.delete();
-        });
-        this.cancel.addClickListener((e) -> {
-            this.editStaffSchedule(this.staffSchedule);
-        });
-        this.setVisible(false);
+
+        workarea.setItems(Staffschedule.Workarea.values());
+        add( staffId, date, startTime, endTime, firstname, lastname, workarea, theaterid, createButtonsLayout());
+
     }
 
-    void delete() {
-        repository.delete(staffSchedule);
-        changeHandler.onChange();
+
+    private HorizontalLayout createButtonsLayout() {
+        save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        delete.addThemeVariants(ButtonVariant.LUMO_ERROR);
+        close.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+
+        save.addClickShortcut(Key.ENTER);
+        close.addClickShortcut(Key.ESCAPE);
+
+        save.addClickListener(click -> validateAndSave());
+        delete.addClickListener(click -> fireEvent(new StaffScheduleEditor.DeleteEvent(this, staffschedule)));
+        close.addClickListener(click -> fireEvent(new StaffScheduleEditor.CloseEvent(this)));
+
+        binder.addStatusChangeListener(evt -> save.setEnabled(binder.isValid()));
+
+        return new HorizontalLayout(save, delete, close);
     }
 
-    void save() {
-        repository.save(staffSchedule);
-        changeHandler.onChange();
+    public void setStaffSchedule(Staffschedule staffschedule) {
+        this.staffschedule = staffschedule;
+        binder.readBean(staffschedule);
     }
 
-    public interface ChangeHandler {
-        void onChange();
-    }
-
-    public final void editStaffSchedule(StaffSchedule s) {
-        if (s == null) {
-            setVisible(false);
-            return;
+    private void validateAndSave() {
+        try {
+            binder.writeBean(staffschedule);
+            fireEvent(new SaveEvent(this, staffschedule));
+        } catch (ValidationException e) {
+            e.printStackTrace();
         }
-        final boolean persisted = s.getLastname() != null;
-        if (persisted) {
-            staffSchedule = (StaffSchedule) repository.findByLastnameStartsWithIgnoreCase(s.getLastname());
-        }
-        else {
-            staffSchedule = s;
-        }
-        cancel.setVisible(persisted);
-        binder.setBean(this.staffSchedule);
-        setVisible(true);
-        firstname.focus();
     }
 
-    public void setChangeHandler(school.newton.sysjs2.grupp3.UAR.StaffScheduleEditor.ChangeHandler h){
-        changeHandler = h;
-    }*/
+
+    public static abstract class StaffScheduleEditorEvent extends ComponentEvent<StaffScheduleEditor> {
+        private Staffschedule staffschedule;
+
+        protected StaffScheduleEditorEvent(StaffScheduleEditor source, Staffschedule staffschedule) {
+            super(source, false);
+            this.staffschedule = staffschedule;
+        }
+
+        public Staffschedule getStaffSchedule() {
+            return staffschedule;
+        }
+    }
+
+    public static class SaveEvent extends StaffScheduleEditorEvent {
+        SaveEvent(StaffScheduleEditor source, Staffschedule staffschedule) {
+
+            super(source, staffschedule);
+        }
+    }
+
+    public static class DeleteEvent extends StaffScheduleEditorEvent {
+        DeleteEvent(StaffScheduleEditor source, Staffschedule staffschedule) {
+            super(source, staffschedule);
+        }
+
+    }
+
+    public static class CloseEvent extends StaffScheduleEditorEvent {
+        CloseEvent(StaffScheduleEditor source) {
+            super(source, null);
+        }
+    }
+
+    public <T extends ComponentEvent<?>> Registration addListener(Class<T> eventType,
+                                                                  ComponentEventListener<T> listener) {
+        return getEventBus().addListener(eventType, listener);
+    }
+
 }
-
-

@@ -11,6 +11,7 @@ import java.sql.Date;
 public class Screening {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Integer screeningid;
     private Integer _movieid;
     private Integer _salonid;

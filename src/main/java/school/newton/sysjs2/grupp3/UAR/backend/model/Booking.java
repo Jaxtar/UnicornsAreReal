@@ -11,6 +11,7 @@ public class Booking {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
+
     private Integer bookingid;
     private Integer _screeningid;
     private Integer _seatid;

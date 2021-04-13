@@ -1,8 +1,9 @@
 package school.newton.sysjs2.grupp3.UAR.backend.repository;
 
+import school.newton.sysjs2.grupp3.UAR.backend.model.Movie;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import school.newton.sysjs2.grupp3.UAR.backend.model.Movie;
 
 import java.util.List;
 

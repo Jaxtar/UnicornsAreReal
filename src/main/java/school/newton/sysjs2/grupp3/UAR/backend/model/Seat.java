@@ -10,6 +10,7 @@ public class Seat {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
+
     private Integer seatid;
     private Integer _salonid;
     private Integer seatnumber;

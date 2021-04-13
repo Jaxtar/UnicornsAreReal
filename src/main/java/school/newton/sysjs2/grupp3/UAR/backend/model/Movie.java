@@ -12,6 +12,7 @@ public class Movie {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
+
     private Integer movieid;
 
     @NotNull
