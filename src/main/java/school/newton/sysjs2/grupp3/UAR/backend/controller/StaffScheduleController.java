@@ -22,9 +22,9 @@ public class StaffScheduleController {
     }
 
 
-    public List<StaffSchedule> findAll() {return repository.findAll();}
+    public List<Staffschedule> findAll() {return repository.findAll();}
 
-    public List<StaffSchedule> findAll(String stringFilter){
+    public List<Staffschedule> findAll(String stringFilter){
 
         if(stringFilter == null || stringFilter.isEmpty()) {
             return repository.findAll();
@@ -34,11 +34,11 @@ public class StaffScheduleController {
     }
 
 
-    public void delete(StaffSchedule staffschedule) {
+    public void delete(Staffschedule staffschedule) {
         repository.delete(staffschedule);
     }
 
-    public void save(StaffSchedule staffschedule) {
+    public void save(Staffschedule staffschedule) {
 
         if (staffschedule == null) {
             LOGGER.log(Level.SEVERE,
