@@ -26,7 +26,7 @@ public class Staffschedule {
     private Time end_time = Time.valueOf(LocalTime.now());
 
     @NotNull
-    private Integer _staffid = 1 ;
+    private Integer _staffid = 0 ;
 
     @NotNull
     @NotEmpty
@@ -40,7 +40,7 @@ public class Staffschedule {
     private Workarea workarea;
 
     @NotNull
-    private Integer _theatreid = 1;
+    private Integer _theatreid = 0;
 
     public Staffschedule(Date date, Time start_time, Time end_time, Integer _staffid, String firstname, String lastname, Workarea workarea, Integer _theatreid ){
         this.date = date;

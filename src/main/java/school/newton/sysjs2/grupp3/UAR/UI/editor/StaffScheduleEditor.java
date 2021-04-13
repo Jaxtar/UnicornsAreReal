@@ -13,6 +13,8 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.data.binder.*;
+import com.vaadin.flow.data.converter.Converter;
+import com.vaadin.flow.data.converter.StringToIntegerConverter;
 import com.vaadin.flow.shared.Registration;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
@@ -20,6 +22,10 @@ import school.newton.sysjs2.grupp3.UAR.UI.converter.SqlDateToLocalDateConverter;
 import school.newton.sysjs2.grupp3.UAR.UI.converter.SqlTimeToLocalTimeConverter;
 import school.newton.sysjs2.grupp3.UAR.backend.model.Staffschedule;
 
+import javax.script.Bindings;
+import javax.swing.event.ChangeListener;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @SpringComponent
@@ -32,12 +38,11 @@ public class StaffScheduleEditor extends FormLayout {
     DatePicker date = new DatePicker("Date");
     TimePicker startTime = new TimePicker("Start Time");
     TimePicker endTime = new TimePicker("End Time");
-
-    //TextField staffId = new TextField("Staff ID");
+    TextField staffId = new TextField("Staff ID");
     TextField firstname = new TextField("First name");
     TextField lastname = new TextField("Last name");
     ComboBox<Staffschedule.Workarea> workarea = new ComboBox<>("Work Area");
-    //TextField theaterid = new TextField("Theater ID");
+    TextField theaterid = new TextField("Theater ID");
 
     Binder<Staffschedule> binder = new BeanValidationBinder<>(Staffschedule.class);
 
@@ -49,6 +54,10 @@ public class StaffScheduleEditor extends FormLayout {
 
     public StaffScheduleEditor(List<Staffschedule> staffschedule) {
         addClassName("Staffschedule-editor");
+
+        binder.forField(staffId)
+               .withConverter(new StringToIntegerConverter(String.valueOf(staffId)))
+                .bind(Staffschedule::get_staffid, Staffschedule::set_staffid);
 
 
         binder.forField(date)
@@ -63,18 +72,18 @@ public class StaffScheduleEditor extends FormLayout {
                 .withConverter(new SqlTimeToLocalTimeConverter())
                 .bind(Staffschedule::getEnd_time, Staffschedule::setEnd_time);
 
+        binder.forField(theaterid)
+                .withConverter(new StringToIntegerConverter(String.valueOf(theaterid)))
+                .bind(Staffschedule::get_theatreid, Staffschedule::set_theatreid);
 
 
         binder.bindInstanceFields(this);
 
 
         workarea.setItems(Staffschedule.Workarea.values());
-        add(date, startTime, endTime, firstname, lastname, workarea, createButtonsLayout());
+        add( staffId, date, startTime, endTime, firstname, lastname, workarea, theaterid, createButtonsLayout());
 
     }
-
-
-
 
 
     private HorizontalLayout createButtonsLayout() {
@@ -146,4 +155,5 @@ public class StaffScheduleEditor extends FormLayout {
                                                                   ComponentEventListener<T> listener) {
         return getEventBus().addListener(eventType, listener);
     }
+
 }
