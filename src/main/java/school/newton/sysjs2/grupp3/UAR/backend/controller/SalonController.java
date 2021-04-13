@@ -1,5 +1,7 @@
 package school.newton.sysjs2.grupp3.UAR.backend.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,5 +21,9 @@ public class SalonController {
     public @ResponseBody
     Iterable<Salon> getAllSalons(){
         return repository.findAll();
+    }
+
+    public List<Salon> getSalonBySalonID(Integer salonid){
+        return repository.findBySalonid(salonid);
     }
 }

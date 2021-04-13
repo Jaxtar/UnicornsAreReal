@@ -10,9 +10,12 @@ public class Seat {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    public Integer seatid;
-    public Integer _salonid;
-    public Integer seatnumber;
+
+    private Integer seatid;
+    private Integer _salonid;
+    private Integer seatnumber;
+
+    public Seat(){}
 
     public Integer getSeatid() {
         return seatid;

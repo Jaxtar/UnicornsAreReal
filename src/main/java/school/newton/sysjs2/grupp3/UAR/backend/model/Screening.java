@@ -16,6 +16,7 @@ public class Screening {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     public Integer screeningid;
 
     public Integer _movieid;
@@ -42,7 +43,6 @@ public class Screening {
 
     public Screening(){
     }
-
 
     public Integer getScreeningid() {
         return screeningid;

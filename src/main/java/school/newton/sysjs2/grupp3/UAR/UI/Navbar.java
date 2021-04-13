@@ -8,9 +8,10 @@ import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
 
+import school.newton.sysjs2.grupp3.UAR.UI.views.BookingView;
 import school.newton.sysjs2.grupp3.UAR.UI.views.MainPage;
 import school.newton.sysjs2.grupp3.UAR.UI.views.MoviesView;
-import school.newton.sysjs2.grupp3.UAR.UI.views.Test2;
+import school.newton.sysjs2.grupp3.UAR.UI.views.SuccessfulView;
 
 @CssImport("/common.css")
 public class Navbar extends AppLayout{
@@ -26,9 +27,9 @@ public class Navbar extends AppLayout{
         Button movies = new Button("Movies");
         movies.addClickListener(e -> UI.getCurrent().navigate(MoviesView.class));
         Button ticket = new Button("Book A Ticket");
-        ticket.addClickListener(e -> UI.getCurrent().navigate(Test2.class));
+        ticket.addClickListener(e -> UI.getCurrent().navigate(BookingView.class));
         Button theatre = new Button("Choose A Theatre");
-        theatre.addClickListener(e -> UI.getCurrent().navigate(Test2.class));
+        theatre.addClickListener(e -> UI.getCurrent().navigate(SuccessfulView.class));
 
         HorizontalLayout header = new HorizontalLayout(name, movies, ticket, theatre);
         header.setClassName("header");

@@ -1,6 +1,5 @@
 package school.newton.sysjs2.grupp3.UAR.UI.views;
 
-
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -11,6 +10,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
+
 import school.newton.sysjs2.grupp3.UAR.UI.MovieForm;
 import school.newton.sysjs2.grupp3.UAR.UI.Navbar;
 import school.newton.sysjs2.grupp3.UAR.UI.ScreeningForm;
@@ -38,6 +38,7 @@ public class MoviesView extends VerticalLayout {
         this.movieController = movieController;
         this.movieRepository = movieRepository;
         this.filter = new TextField();
+
         setSizeFull();
         getToolbar();
         configureGrid();
@@ -52,6 +53,18 @@ public class MoviesView extends VerticalLayout {
         content.setSizeFull();
 
         add(getToolbar(), content);
+        updateList();
+        closeEditor();
+    }
+
+    private void deleteMovie(MovieForm.DeleteEvent evt) {
+        movieController.delete(evt.getMovie());
+        updateList();
+        closeEditor();
+    }
+
+    private void saveMovie(MovieForm.SaveEvent evt) {
+        movieController.save(evt.getMovie());
         updateList();
         closeEditor();
     }

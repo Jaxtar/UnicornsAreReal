@@ -11,10 +11,17 @@ public class Booking {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    public Integer bookingid;
-    public Integer _screeningid;
-    public Integer _seatid;
 
+    private Integer bookingid;
+    private Integer _screeningid;
+    private Integer _seatid;
+
+    public Booking(){}
+
+    public Booking(Integer screeningID, Integer seatID){
+        this._screeningid = screeningID;
+        this._seatid = seatID;
+    }
 
     public Integer getBookingid() {
         return bookingid;
