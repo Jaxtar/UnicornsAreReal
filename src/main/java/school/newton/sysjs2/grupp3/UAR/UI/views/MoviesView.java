@@ -57,18 +57,6 @@ public class MoviesView extends VerticalLayout {
         closeEditor();
     }
 
-    private void deleteMovie(MovieForm.DeleteEvent evt) {
-        movieController.delete(evt.getMovie());
-        updateList();
-        closeEditor();
-    }
-
-    private void saveMovie(MovieForm.SaveEvent evt) {
-        movieController.save(evt.getMovie());
-        updateList();
-        closeEditor();
-    }
-
     private void configureGrid() {
         grid.setSizeFull();
         grid.setColumns("title", "agerating", "description");
