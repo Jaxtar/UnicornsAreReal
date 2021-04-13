@@ -4,27 +4,65 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Staff {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer staffid;
-    private String firstname;
-    private String lastname;
-    private String email;
-    private String username;
-    private String password;
+    public Integer staffid;
 
-    public Staff(){}
+    @NotNull
+    @NotEmpty
+    private String firstname = "";
+
+    @NotNull
+    @NotEmpty
+    private String lastname = "";
+
+    @Email
+    @NotNull
+    @NotEmpty
+    private String email = "";
+
+
+    @NotNull
+    @NotEmpty
+    private String username = "";
+
+    @NotNull
+    @NotEmpty
+    private String password = "";
+
+    public Staff(String firstname, String lastname, String email, String username, String password){
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+    }
+
+    public Staff(){
+
+    }
 
     public Integer getStaffid() {
         return staffid;
     }
 
-    public void setStaffid(Integer staffid) {
-        this.staffid = staffid;
+    public boolean isPersisted() {
+        return staffid != null;
+    }
+
+    @Override
+    public int hashCode() {
+        if (getStaffid() != null) {
+            return getStaffid().hashCode();
+        }
+        return super.hashCode();
     }
 
     public String getFirstname() {
@@ -58,4 +96,10 @@ public class Staff {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public String getPassword() { return password; }
+
+    public void setPassword (String password) {this.password = password;}
+
 }
+

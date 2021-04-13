@@ -1,33 +1,77 @@
 package school.newton.sysjs2.grupp3.UAR.backend.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.sql.Time;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
-public class StaffSchedule {
+public class Staffschedule {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer staffscheduleid;
-    private Date date;
-    private Time start_time;
-    private Time end_time;
-    private String workarea;
-    private Integer _staffid;
-    private Integer _theatreid;
+    public Integer staffscheduleid;
 
-    public StaffSchedule(){}
+    @NotNull
+    public Date date = Date.valueOf(LocalDate.now());
+
+    @NotNull
+    public Time start_time = Time.valueOf(LocalTime.now());
+
+    @NotNull
+    private Time end_time = Time.valueOf(LocalTime.now());
+
+    @NotNull
+    private Integer _staffid = 0 ;
+
+    @NotNull
+    @NotEmpty
+    private String firstname = "";
+
+    @NotNull
+    @NotEmpty
+    private String lastname = "";
+
+    @Enumerated(EnumType.STRING)
+    private Workarea workarea;
+
+    @NotNull
+    private Integer _theatreid = 0;
+
+    public Staffschedule(Date date, Time start_time, Time end_time, Integer _staffid, String firstname, String lastname, Workarea workarea, Integer _theatreid ){
+        this.date = date;
+        this.start_time = start_time;
+        this.end_time = end_time;
+        this._staffid = _staffid;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.workarea = workarea;
+        this._theatreid = _theatreid;
+    }
+
+    public Staffschedule(){
+
+    }
+
 
     public Integer getStaffscheduleid() {
         return staffscheduleid;
     }
 
-    public void setStaffscheduleid(Integer staffscheduleid) {
-        this.staffscheduleid = staffscheduleid;
+    public boolean isPersisted() {
+        return staffscheduleid != null;
+    }
+
+    @Override
+    public int hashCode() {
+        if (getStaffscheduleid() != null) {
+            return getStaffscheduleid().hashCode();
+        }
+        return super.hashCode();
     }
 
     public Date getDate() {
@@ -50,15 +94,19 @@ public class StaffSchedule {
         return end_time;
     }
 
-    public void setEnd_time(Time end_time) {
-        this.end_time = end_time;
+    public void setEnd_time(Time end_time) { this.end_time = end_time;
     }
 
-    public String getWorkarea() {
+
+    public enum Workarea {
+         Supervisor, Projectionist, Cashier, Usher
+    }
+
+    public Workarea getWorkarea() {
         return workarea;
     }
 
-    public void setWorkarea(String workarea) {
+    public void setWorkarea(Workarea workarea) {
         this.workarea = workarea;
     }
 
@@ -70,6 +118,22 @@ public class StaffSchedule {
         this._staffid = _staffid;
     }
 
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setfirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
     public Integer get_theatreid() {
         return _theatreid;
     }
@@ -77,4 +141,5 @@ public class StaffSchedule {
     public void set_theatreid(Integer _theatreid) {
         this._theatreid = _theatreid;
     }
+
 }

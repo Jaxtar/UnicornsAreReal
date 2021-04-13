@@ -13,8 +13,8 @@ import school.newton.sysjs2.grupp3.UAR.backend.repository.BookingRepository;
 
 @Controller
 public class BookingController {
-
     private static final Logger LOGGER = Logger.getLogger(BookingController.class.getName());
+  
     @Autowired
     private BookingRepository repository;
 
