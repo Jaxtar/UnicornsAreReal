@@ -32,7 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests()
                 .requestMatchers(SecurityUtils::isFrameworkInternalRequest).permitAll()
                 .and().formLogin()
-                .loginPage(LOGIN_URL)//.permitAll()
+                .loginPage(LOGIN_URL).permitAll()
                 .loginProcessingUrl(LOGIN_PROCESSING_URL)
                 .defaultSuccessUrl("/staff/schedule", true)
                 .failureUrl(LOGIN_FAILURE_URL)
