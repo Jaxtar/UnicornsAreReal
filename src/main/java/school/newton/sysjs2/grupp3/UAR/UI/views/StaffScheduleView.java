@@ -18,8 +18,7 @@ import school.newton.sysjs2.grupp3.UAR.backend.repository.StaffScheduleRepositor
 
 
 @Route(
-        value = "staff/schedule",
-        layout = Navbar.class)
+        value = "staff/schedule")
 @PageTitle("Staff - Schedule - Unicorns Are Real!")
 @CssImport("./common.css")
 public class StaffScheduleView extends VerticalLayout {

@@ -18,8 +18,7 @@ import school.newton.sysjs2.grupp3.UAR.backend.repository.StaffRepository;
 
 
 @Route(
-        value = "staff/info",
-        layout = Navbar.class)
+        value = "staff/info")
 @PageTitle("Staff - Info - Unicorns Are Real")
 @CssImport("./common.css")
 public class StaffView extends VerticalLayout {
