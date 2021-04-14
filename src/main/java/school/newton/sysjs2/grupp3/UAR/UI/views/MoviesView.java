@@ -13,13 +13,9 @@ import com.vaadin.flow.router.Route;
 
 import school.newton.sysjs2.grupp3.UAR.UI.MovieForm;
 import school.newton.sysjs2.grupp3.UAR.UI.Navbar;
-import school.newton.sysjs2.grupp3.UAR.UI.ScreeningForm;
 import school.newton.sysjs2.grupp3.UAR.backend.controller.MovieController;
-import school.newton.sysjs2.grupp3.UAR.backend.controller.ScreeningController;
 import school.newton.sysjs2.grupp3.UAR.backend.model.Movie;
-import school.newton.sysjs2.grupp3.UAR.backend.model.Screening;
 import school.newton.sysjs2.grupp3.UAR.backend.repository.MovieRepository;
-import school.newton.sysjs2.grupp3.UAR.backend.repository.ScreeningRepository;
 
 @Route(value="/movies", layout= Navbar.class)
 @CssImport("./common.css")
