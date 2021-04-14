@@ -17,7 +17,7 @@ import school.newton.sysjs2.grupp3.UAR.backend.repository.StaffScheduleRepositor
 
 
 @Route(
-        value = "staff/schedule",
+        value = "/staff/schedule",
         layout = StaffLayout.class)
 @PageTitle("Staff - Schedule - Unicorns Are Real!")
 @CssImport("./common.css")
