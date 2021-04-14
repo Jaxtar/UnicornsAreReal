@@ -8,7 +8,8 @@ import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-@Route(value = "/login")
+@Route(value="/login")
+
 @PageTitle("Login - Unicorns Are Real Staff")
 public class StaffLoginView extends VerticalLayout implements BeforeEnterObserver {
     private LoginForm loginForm = new LoginForm();

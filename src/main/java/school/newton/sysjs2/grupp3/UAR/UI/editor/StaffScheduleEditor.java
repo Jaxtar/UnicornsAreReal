@@ -13,7 +13,6 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.data.binder.*;
-import com.vaadin.flow.data.converter.Converter;
 import com.vaadin.flow.data.converter.StringToIntegerConverter;
 import com.vaadin.flow.shared.Registration;
 import com.vaadin.flow.spring.annotation.SpringComponent;
@@ -22,10 +21,7 @@ import school.newton.sysjs2.grupp3.UAR.UI.converter.SqlDateToLocalDateConverter;
 import school.newton.sysjs2.grupp3.UAR.UI.converter.SqlTimeToLocalTimeConverter;
 import school.newton.sysjs2.grupp3.UAR.backend.model.Staffschedule;
 
-import javax.script.Bindings;
-import javax.swing.event.ChangeListener;
-import java.sql.Date;
-import java.time.LocalDate;
+
 import java.util.List;
 
 @SpringComponent
@@ -33,6 +29,7 @@ import java.util.List;
 public class StaffScheduleEditor extends FormLayout {
 
     private Staffschedule staffschedule;
+
 
 
     DatePicker date = new DatePicker("Date");
