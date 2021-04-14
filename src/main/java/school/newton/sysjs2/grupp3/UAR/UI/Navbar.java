@@ -8,10 +8,7 @@ import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
 
-import school.newton.sysjs2.grupp3.UAR.UI.views.BookingView;
-import school.newton.sysjs2.grupp3.UAR.UI.views.MainPage;
-import school.newton.sysjs2.grupp3.UAR.UI.views.MoviesView;
-import school.newton.sysjs2.grupp3.UAR.UI.views.SuccessfulView;
+import school.newton.sysjs2.grupp3.UAR.UI.views.*;
 
 @CssImport("/common.css")
 public class Navbar extends AppLayout{
@@ -30,8 +27,10 @@ public class Navbar extends AppLayout{
         ticket.addClickListener(e -> UI.getCurrent().navigate(BookingView.class));
         Button theatre = new Button("Choose A Theatre");
         theatre.addClickListener(e -> UI.getCurrent().navigate(SuccessfulView.class));
+        Button login = new Button("Staff - Log In");
+        login.addClickListener(e -> UI.getCurrent().navigate(StaffLoginView.class));
 
-        HorizontalLayout header = new HorizontalLayout(name, movies, ticket, theatre);
+        HorizontalLayout header = new HorizontalLayout(name, movies, ticket, theatre, login);
         header.setClassName("header");
         header.setWidth("100%");
         header.setDefaultVerticalComponentAlignment(Alignment.CENTER);

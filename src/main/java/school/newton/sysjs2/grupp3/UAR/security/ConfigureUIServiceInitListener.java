@@ -5,7 +5,7 @@ import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.server.ServiceInitEvent;
 import com.vaadin.flow.server.VaadinServiceInitListener;
 import org.springframework.stereotype.Component;
-import school.newton.sysjs2.grupp3.UAR.UI.views.StaffLoginView;
+import school.newton.sysjs2.grupp3.UAR.UI.views.*;
 
 @Component
 public class ConfigureUIServiceInitListener implements VaadinServiceInitListener {
@@ -19,9 +19,10 @@ public class ConfigureUIServiceInitListener implements VaadinServiceInitListener
     }
 
     private void authenticateNavigation(BeforeEnterEvent event) {
-        if (!StaffLoginView.class.equals(event.getNavigationTarget())
+        if (!StaffLoginView.class.equals(event.getNavigationTarget()) && !BookingView.class.equals(event.getNavigationTarget())
+                && !SuccessfulView.class.equals(event.getNavigationTarget()) && !MoviesView.class.equals(event.getNavigationTarget())
                 && !SecurityUtils.isUserLoggedIn()) {
-            event.rerouteTo(StaffLoginView.class);
+            event.rerouteTo(MainPage.class);
         }
     }
 }

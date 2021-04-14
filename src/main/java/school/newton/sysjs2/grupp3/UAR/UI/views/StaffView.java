@@ -17,7 +17,7 @@ import school.newton.sysjs2.grupp3.UAR.backend.repository.StaffRepository;
 
 
 @Route(
-        value = "staff/info",
+        value = "/staff/info",
         layout = StaffLayout.class)
 @PageTitle("Staff - Info - Unicorns Are Real")
 @CssImport("./common.css")
@@ -55,7 +55,7 @@ public class StaffView extends VerticalLayout {
         grid.addClassName("contact-grid");
         grid.setSizeFull();
         grid.removeColumnByKey("password");
-        grid.setColumns("staffid", "firstname", "lastname", "email", "username");
+        grid.setColumns("firstname", "lastname", "email", "username");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
         grid.asSingleSelect().addValueChangeListener(event ->
                 editStaff(event.getValue()));
