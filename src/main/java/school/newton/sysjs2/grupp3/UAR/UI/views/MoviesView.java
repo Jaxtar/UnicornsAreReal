@@ -73,10 +73,10 @@ public class MoviesView extends VerticalLayout {
 
         Button addNewMovieButton = new Button("New Movie", click -> addMovie());
 
-        Button addNewScreeningButton = new Button("ScreeningList");
-        addNewScreeningButton.addClickListener(e -> UI.getCurrent().navigate(ScreeningsView.class));
+       // Button addNewScreeningButton = new Button("ScreeningList");
+       // addNewScreeningButton.addClickListener(e -> UI.getCurrent().navigate(ScreeningsView.class));
 
-        HorizontalLayout toolbar = new HorizontalLayout(filter, addNewMovieButton, addNewScreeningButton);
+        HorizontalLayout toolbar = new HorizontalLayout(filter, addNewMovieButton);
         toolbar.addClassName("toolbar");
 
         return toolbar;
