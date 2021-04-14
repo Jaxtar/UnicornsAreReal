@@ -14,7 +14,7 @@ import school.newton.sysjs2.grupp3.UAR.UI.Navbar;
 import school.newton.sysjs2.grupp3.UAR.backend.controller.MovieController;
 import school.newton.sysjs2.grupp3.UAR.backend.repository.MovieRepository;
 
-@Route(value="/stafflayout", layout= Navbar.class)
+@Route(value="/staffarea", layout= Navbar.class)
 @CssImport("./common.css")
 public class StaffArea extends VerticalLayout {
 

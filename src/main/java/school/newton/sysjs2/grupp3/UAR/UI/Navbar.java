@@ -18,7 +18,6 @@ import school.newton.sysjs2.grupp3.UAR.UI.views.*;
 public class Navbar extends AppLayout{
     public Navbar(){
         createHeader();
-        createDrawer();
     }
 
     private void createHeader() {
@@ -39,12 +38,5 @@ public class Navbar extends AppLayout{
         header.setDefaultVerticalComponentAlignment(Alignment.CENTER);
 
         addToNavbar(header);
-    }
-
-    private void createDrawer() {
-
-        RouterLink staff = new RouterLink("Staff Area", StaffArea.class);
-        Anchor logout = new Anchor("logout", "SIGN OUT");
-        addToDrawer(new VerticalLayout(staff, logout));
     }
 }
