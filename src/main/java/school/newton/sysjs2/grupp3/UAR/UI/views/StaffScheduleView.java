@@ -10,6 +10,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import school.newton.sysjs2.grupp3.UAR.UI.Navbar;
 import school.newton.sysjs2.grupp3.UAR.UI.editor.StaffScheduleEditor;
 import school.newton.sysjs2.grupp3.UAR.backend.controller.StaffScheduleController;
 import school.newton.sysjs2.grupp3.UAR.backend.model.Staffschedule;
@@ -18,7 +19,7 @@ import school.newton.sysjs2.grupp3.UAR.backend.repository.StaffScheduleRepositor
 
 @Route(
         value = "staff/schedule",
-        layout = StaffLayout.class)
+        layout = Navbar.class)
 @PageTitle("Staff - Schedule - Unicorns Are Real!")
 @CssImport("./common.css")
 public class StaffScheduleView extends VerticalLayout {

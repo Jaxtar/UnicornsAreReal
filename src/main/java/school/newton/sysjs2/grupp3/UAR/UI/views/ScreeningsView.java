@@ -42,13 +42,17 @@ public class ScreeningsView extends VerticalLayout {
         this.screeningRepository = screeningRepository;
         this.filter = new TextField();
         setSizeFull();
-        getToolbar();
         configureGrid();
 
         movie.setItems(movieController.findAll());
         movie.setItemLabelGenerator(Movie::getTitle);
         movie.addValueChangeListener(e -> updateList());
-        movie.setWidth("25%");
+      //  movie.setWidth("25%");
+
+        Button addNewScreeningButton = new Button("New Screening", click -> addScreening());
+
+        HorizontalLayout toolbar = new HorizontalLayout(movie, addNewScreeningButton);
+        toolbar.setDefaultVerticalComponentAlignment(Alignment.END);
 
         screeningForm = new ScreeningForm(screeningController.getAllScreenings());
         screeningForm.addListener(ScreeningForm.SaveEvent.class,this::saveScreening);
@@ -60,7 +64,7 @@ public class ScreeningsView extends VerticalLayout {
         content.addClassName("content");
         content.setSizeFull();
 
-        add(getToolbar(), movie, content);
+        add(toolbar, content);
     }
 
     private void configureGrid() {
@@ -69,22 +73,6 @@ public class ScreeningsView extends VerticalLayout {
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
         grid.asSingleSelect().addValueChangeListener(evt -> editScreening(evt.getValue()));
-    }
-
-    private HorizontalLayout getToolbar() {
-        filter.setValue("Filter by title...");
-        filter.setClearButtonVisible(false);
-        filter.setEnabled(false);
-
-        Button addNewMovieButton = new Button("MovieList");
-        addNewMovieButton.addClickListener(e -> UI.getCurrent().navigate(MoviesView.class));
-
-        Button addNewScreeningButton = new Button("New Screening", click -> addScreening());
-
-        HorizontalLayout toolbar = new HorizontalLayout(filter, addNewMovieButton, addNewScreeningButton);
-        toolbar.addClassName("toolbar");
-
-        return toolbar;
     }
 
     private void closeEditor() {
