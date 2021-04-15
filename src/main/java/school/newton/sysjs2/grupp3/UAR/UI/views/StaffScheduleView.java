@@ -18,8 +18,8 @@ import school.newton.sysjs2.grupp3.UAR.backend.repository.StaffScheduleRepositor
 
 
 @Route(
-        value = "staff/schedule",
-        layout = Navbar.class)
+        value = "/staff/schedule",
+        layout = StaffLayout.class)
 @PageTitle("Staff - Schedule - Unicorns Are Real!")
 @CssImport("./common.css")
 public class StaffScheduleView extends VerticalLayout {
@@ -54,7 +54,7 @@ public class StaffScheduleView extends VerticalLayout {
     private void configureGrid() {
         grid.addClassName("contact-grid");
         grid.setSizeFull();
-        grid.setColumns("staffscheduleid", "date", "start_time", "end_time", "_staffid", "firstname", "lastname", "workarea", "_theatreid");
+        grid.setColumns("date", "start_time", "end_time", "firstname", "lastname", "workarea", "_theatreid");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
         grid.asSingleSelect().addValueChangeListener(event ->
                 editStaffSchedule(event.getValue()));

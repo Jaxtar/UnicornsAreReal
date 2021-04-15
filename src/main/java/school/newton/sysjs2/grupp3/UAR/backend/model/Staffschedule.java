@@ -99,7 +99,7 @@ public class Staffschedule {
 
 
     public enum Workarea {
-         Supervisor, Projectionist, Cashier, Usher
+        Supervisor, Projectionist, Cashier, Usher
     }
 
     public Workarea getWorkarea() {

@@ -10,8 +10,6 @@ import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
 
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.router.RouterLink;
 import school.newton.sysjs2.grupp3.UAR.UI.views.*;
 
 @CssImport("/common.css")
@@ -32,8 +30,13 @@ public class Navbar extends AppLayout{
         Button ticket = new Button("Book A Ticket");
         ticket.addClickListener(e -> UI.getCurrent().navigate(BookingView.class));
 
+        Button theatre = new Button("Choose A Theatre");
+        theatre.addClickListener(e -> UI.getCurrent().navigate(SuccessfulView.class));
+        Button login = new Button("Staff - Log In");
+        login.addClickListener(e -> UI.getCurrent().navigate(StaffLoginView.class));
 
-        HorizontalLayout header = new HorizontalLayout(name, movies, ticket);
+        HorizontalLayout header = new HorizontalLayout(name, movies, ticket, theatre, login);
+
         header.setClassName("header");
         header.setWidth("100%");
         header.setDefaultVerticalComponentAlignment(Alignment.CENTER);
