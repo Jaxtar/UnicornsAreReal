@@ -34,7 +34,7 @@ public class MovieController {
         if (stringFilter == null || stringFilter.isEmpty()){
             return repository.findAll();
         } else {
-            return repository.findByTitle(stringFilter);
+            return repository.findByTitleContainsIgnoreCase(stringFilter);
         }
     }
 

@@ -32,9 +32,10 @@ public class StaffLayout extends AppLayout {
 
         RouterLink scheduleLink = new RouterLink("Staff Schedule", StaffScheduleView.class);
         RouterLink staffLink = new RouterLink("Staff Info", StaffView.class);
+        RouterLink moviesLink = new RouterLink("Movies List", MoviesView.class);
         RouterLink screeningLink = new RouterLink("Screenings List", ScreeningsView.class);
         Anchor logout = new Anchor("logout", "SIGN OUT");
-        addToDrawer(new VerticalLayout(scheduleLink, staffLink, screeningLink, logout));
+        addToDrawer(new VerticalLayout(scheduleLink, staffLink, moviesLink, screeningLink, logout));
 
     }
 }
