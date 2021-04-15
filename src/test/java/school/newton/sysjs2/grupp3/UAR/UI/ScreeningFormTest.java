@@ -10,14 +10,12 @@ import school.newton.sysjs2.grupp3.UAR.backend.model.Screening;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static java.sql.Date.valueOf;
 import static java.time.LocalDate.*;
 
 /**
