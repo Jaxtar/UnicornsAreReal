@@ -10,7 +10,7 @@ import school.newton.sysjs2.grupp3.UAR.UI.Navbar;
 @PageTitle("Unicorns Are Real!")
 public class MainPage extends VerticalLayout{
     public MainPage(){
-        H1 test = new H1("Test");
+        H1 test = new H1("MainPage");
         add(test);
     }
 }

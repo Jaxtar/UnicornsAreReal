@@ -1,6 +1,5 @@
 package school.newton.sysjs2.grupp3.UAR.UI.views;
 
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -10,8 +9,6 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
-import school.newton.sysjs2.grupp3.UAR.UI.MovieForm;
-import school.newton.sysjs2.grupp3.UAR.UI.Navbar;
 import school.newton.sysjs2.grupp3.UAR.UI.ScreeningForm;
 import school.newton.sysjs2.grupp3.UAR.backend.controller.MovieController;
 import school.newton.sysjs2.grupp3.UAR.backend.controller.ScreeningController;
@@ -21,7 +18,7 @@ import school.newton.sysjs2.grupp3.UAR.backend.repository.ScreeningRepository;
 
 import java.util.Collection;
 
-@Route(value="/screenings", layout= Navbar.class)
+@Route(value="/screenings", layout= StaffLayout.class)
 @CssImport("./common.css")
 public class ScreeningsView extends VerticalLayout {
 
