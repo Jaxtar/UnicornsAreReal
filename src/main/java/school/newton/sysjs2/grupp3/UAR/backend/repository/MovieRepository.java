@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface MovieRepository extends CrudRepository<Movie, Integer> {
    List<Movie> findAll();
-   List<Movie> findByTitle(String searchTerm);
+   List<Movie> findByTitleContainsIgnoreCase(String searchTerm);
    // List<Movie> findByAgerating(String searchTerm);
 }
