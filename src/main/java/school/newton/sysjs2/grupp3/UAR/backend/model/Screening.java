@@ -4,30 +4,51 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.sql.Time;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 public class Screening {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private Integer screeningid;
-    private Integer _movieid;
-    private Integer _salonid;
-    private Date date;
-    private Time start_time;
-    private Time end_time;
+    public Integer screeningid;
 
-    public Screening(){}
+    public Integer _movieid;
+
+    public Integer _salonid;
+
+    public Date date = Date.valueOf(LocalDate.now());
+
+    public Time start_time = Time.valueOf(LocalTime.now());
+
+    public Time end_time = Time.valueOf(LocalTime.now());
+
+
+    public Screening(Integer screeningid, Integer _movieid,
+                     Integer _salonid, Date date, Time start_time,
+                     Time end_time){
+        this.screeningid = screeningid;
+        this._movieid = _movieid;
+        this._salonid = _salonid;
+        this.date = date;
+        this.start_time = start_time;
+        this.end_time = end_time;
+    }
+
+    public Screening(){
+    }
 
     public Integer getScreeningid() {
         return screeningid;
     }
 
-    public void setScreeningid(Integer screeningid) {
-        this.screeningid = screeningid;
-    }
+    public void setScreeningid(Integer screeningid) {this.screeningid = screeningid;}
 
     public Integer get_movieid() {
         return _movieid;
