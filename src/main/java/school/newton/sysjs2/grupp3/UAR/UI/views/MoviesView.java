@@ -8,15 +8,17 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
+import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+
 import school.newton.sysjs2.grupp3.UAR.UI.MovieForm;
-import school.newton.sysjs2.grupp3.UAR.UI.Navbar;
 import school.newton.sysjs2.grupp3.UAR.backend.controller.MovieController;
 import school.newton.sysjs2.grupp3.UAR.backend.model.Movie;
 import school.newton.sysjs2.grupp3.UAR.backend.repository.MovieRepository;
 
 @Route(value="/movies", layout= StaffLayout.class)
 @CssImport("./common.css")
+@PageTitle("All Our Movies")
 public class MoviesView extends VerticalLayout {
 
     Grid<Movie> grid = new Grid<>(Movie.class);
@@ -66,9 +68,6 @@ public class MoviesView extends VerticalLayout {
         filter.addValueChangeListener(e -> updateList());
 
         Button addNewMovieButton = new Button("New Movie", click -> addMovie());
-
-       // Button addNewScreeningButton = new Button("ScreeningList");
-       // addNewScreeningButton.addClickListener(e -> UI.getCurrent().navigate(ScreeningsView.class));
 
         HorizontalLayout toolbar = new HorizontalLayout(filter, addNewMovieButton);
         toolbar.addClassName("toolbar");

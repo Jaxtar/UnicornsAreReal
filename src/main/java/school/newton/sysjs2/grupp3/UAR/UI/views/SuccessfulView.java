@@ -5,6 +5,7 @@ import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+
 import school.newton.sysjs2.grupp3.UAR.UI.Navbar;
 
 @Route(value="/booking/successful", layout=Navbar.class)

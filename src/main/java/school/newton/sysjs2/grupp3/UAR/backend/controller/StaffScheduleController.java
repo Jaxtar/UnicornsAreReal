@@ -25,7 +25,6 @@ public class StaffScheduleController {
     public List<Staffschedule> findAll() {return repository.findAll();}
 
     public List<Staffschedule> findAll(String stringFilter){
-
         if(stringFilter == null || stringFilter.isEmpty()) {
             return repository.findAll();
         }else {

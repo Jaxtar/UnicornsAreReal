@@ -1,9 +1,9 @@
 package school.newton.sysjs2.grupp3.UAR.UI.editor;
 
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
 import school.newton.sysjs2.grupp3.UAR.backend.model.Staff;
 
 import java.util.ArrayList;

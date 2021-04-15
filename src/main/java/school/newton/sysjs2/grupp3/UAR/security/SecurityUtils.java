@@ -2,11 +2,13 @@ package school.newton.sysjs2.grupp3.UAR.security;
 
 import com.vaadin.flow.server.HandlerHelper.RequestType;
 import com.vaadin.flow.shared.ApplicationConstants;
+
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.util.stream.Stream;
 
 public class SecurityUtils {

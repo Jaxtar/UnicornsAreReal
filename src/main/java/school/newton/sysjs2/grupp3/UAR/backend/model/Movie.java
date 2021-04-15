@@ -12,7 +12,6 @@ public class Movie {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-
     private Integer movieid;
 
     @NotNull
@@ -26,7 +25,6 @@ public class Movie {
     @NotNull
     @NotEmpty
     private String agerating;
-
 
     public Movie(String title, String description, String agerating){
     this.title = title;
@@ -65,5 +63,4 @@ public class Movie {
     public void setAgerating(String agerating) {
         this.agerating = agerating;
     }
-
 }

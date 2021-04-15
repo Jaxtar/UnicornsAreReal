@@ -1,6 +1,5 @@
 package school.newton.sysjs2.grupp3.UAR.backend.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,6 +29,7 @@ public class MovieController {
         return repository.findAll();
     }
 
+    // Finds all movies with the given filter text
     public List<Movie> findAll(String stringFilter){
         if (stringFilter == null || stringFilter.isEmpty()){
             return repository.findAll();
@@ -42,6 +42,7 @@ public class MovieController {
         repository.delete(movie);
     }
 
+    // Saves and logs a movie
     public void save(Movie movie) {
         if (movie == null) {
             LOGGER.log(Level.SEVERE, "Movie is null. Are you sure you have connected your form to the application?");

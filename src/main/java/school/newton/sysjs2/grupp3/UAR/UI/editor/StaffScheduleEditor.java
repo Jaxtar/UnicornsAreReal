@@ -1,6 +1,5 @@
 package school.newton.sysjs2.grupp3.UAR.UI.editor;
 
-
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.Key;
@@ -17,10 +16,10 @@ import com.vaadin.flow.data.converter.StringToIntegerConverter;
 import com.vaadin.flow.shared.Registration;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
+
 import school.newton.sysjs2.grupp3.UAR.UI.converter.SqlDateToLocalDateConverter;
 import school.newton.sysjs2.grupp3.UAR.UI.converter.SqlTimeToLocalTimeConverter;
 import school.newton.sysjs2.grupp3.UAR.backend.model.Staffschedule;
-
 
 import java.util.List;
 
@@ -29,8 +28,6 @@ import java.util.List;
 public class StaffScheduleEditor extends FormLayout {
 
     private Staffschedule staffschedule;
-
-
 
     DatePicker date = new DatePicker("Date");
     TimePicker startTime = new TimePicker("Start Time");
@@ -47,7 +44,6 @@ public class StaffScheduleEditor extends FormLayout {
     Button save = new Button("Save");
     Button delete = new Button("Delete");
     Button close = new Button("Cancel");
-
 
     public StaffScheduleEditor(List<Staffschedule> staffschedule) {
         addClassName("Staffschedule-editor");
@@ -81,7 +77,6 @@ public class StaffScheduleEditor extends FormLayout {
         add( staffId, date, startTime, endTime, firstname, lastname, workarea, theaterid, createButtonsLayout());
 
     }
-
 
     private HorizontalLayout createButtonsLayout() {
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);

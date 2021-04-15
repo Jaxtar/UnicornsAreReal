@@ -1,6 +1,5 @@
 package school.newton.sysjs2.grupp3.UAR.backend.model;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,7 +10,6 @@ public class Booking {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-
     private Integer bookingid;
     private Integer _screeningid;
     private Integer _seatid;
@@ -46,5 +44,4 @@ public class Booking {
     public void set_seatid(Integer _seatid) {
         this._seatid = _seatid;
     }
-
 }

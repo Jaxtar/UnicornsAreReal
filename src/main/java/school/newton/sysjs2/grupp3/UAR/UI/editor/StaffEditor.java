@@ -14,11 +14,10 @@ import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.shared.Registration;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
+
 import school.newton.sysjs2.grupp3.UAR.backend.model.Staff;
 
-
 import java.util.List;
-
 
 @SpringComponent
 @UIScope

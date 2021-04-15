@@ -9,6 +9,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
+
 import school.newton.sysjs2.grupp3.UAR.UI.ScreeningForm;
 import school.newton.sysjs2.grupp3.UAR.backend.controller.MovieController;
 import school.newton.sysjs2.grupp3.UAR.backend.controller.ScreeningController;
@@ -44,7 +45,6 @@ public class ScreeningsView extends VerticalLayout {
         movie.setItems(movieController.findAll());
         movie.setItemLabelGenerator(Movie::getTitle);
         movie.addValueChangeListener(e -> updateList());
-      //  movie.setWidth("25%");
 
         Button addNewScreeningButton = new Button("New Screening", click -> addScreening());
 

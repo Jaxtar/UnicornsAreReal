@@ -7,8 +7,7 @@ import com.vaadin.flow.data.converter.Converter;
 import java.sql.Date;
 import java.time.LocalDate;
 
-public class SqlDateToLocalDateConverter
-        implements Converter<LocalDate, Date> {
+public class SqlDateToLocalDateConverter implements Converter<LocalDate, Date> {
     @Override
     public Result<Date> convertToModel(LocalDate value,
                                        ValueContext context) {
@@ -17,13 +16,15 @@ public class SqlDateToLocalDateConverter
         }
         return Result.ok( Date.valueOf( value) );
     }
+    
     @Override
     public LocalDate convertToPresentation(Date value,
                                            ValueContext context) {
         return value.toLocalDate();
     }
+
+    @Override
+    public <T> Converter<LocalDate, T> chain(Converter<Date, T> other) {
+        return null;
+    }
 }
-//rad 18:   return Result.ok( Date.valueOf( value) );
-//lägg till
-//rad 23:   if (value == null){
-//rad 24:   return LocalDate.now();

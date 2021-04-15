@@ -23,6 +23,7 @@ public class StaffController {
 
     public List<Staff> findAll() {return repository.findAll();}
 
+    // Finds all staff with a certain last name
     public List<Staff> findAll(String stringFilter){
         if(stringFilter == null || stringFilter.isEmpty()) {
             return repository.findAll();

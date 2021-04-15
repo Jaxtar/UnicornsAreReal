@@ -7,9 +7,9 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import school.newton.sysjs2.grupp3.UAR.backend.model.Booking;
 import school.newton.sysjs2.grupp3.UAR.backend.repository.BookingRepository;
-
 
 @Controller
 public class BookingController {
@@ -22,11 +22,13 @@ public class BookingController {
         this.repository = repository;
     }
 
+    // Finds all the bookings
     public @ResponseBody
     Iterable<Booking> getAllBookings(){
         return repository.findAll();
     }
 
+    // Saves a booking
     public void save(Booking booking) {
         if (booking == null) {
             LOGGER.log(Level.SEVERE, "Booking is null. Are you sure you have connected your form to the application?");
@@ -39,6 +41,7 @@ public class BookingController {
         repository.save(booking);
     }
 
+    // Find all the bookings already done for a set screening
     public List<Booking> getBookingsByScreeningID(Integer screeningID){
         return repository.findBy_screeningid(screeningID);
     }

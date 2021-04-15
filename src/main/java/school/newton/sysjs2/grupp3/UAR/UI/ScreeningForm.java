@@ -14,6 +14,9 @@ import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.shared.Registration;
+
+import school.newton.sysjs2.grupp3.UAR.UI.converter.SqlDateToLocalDateConverter;
+import school.newton.sysjs2.grupp3.UAR.UI.converter.SqlTimeToLocalTimeConverter;
 import school.newton.sysjs2.grupp3.UAR.backend.model.Screening;
 
 public class ScreeningForm extends FormLayout {
@@ -51,7 +54,6 @@ public class ScreeningForm extends FormLayout {
         screeningBinder.bindInstanceFields(this);
 
         screeningid.setReadOnly(true);
-        //_movieid.setReadOnly(true);
 
         add(screeningid, _movieid, _salonid, date, start_time, end_time, createButtonsLayout());
     }

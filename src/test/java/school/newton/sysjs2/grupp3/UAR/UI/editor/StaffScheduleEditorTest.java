@@ -1,13 +1,9 @@
 package school.newton.sysjs2.grupp3.UAR.UI.editor;
 
-import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.component.datepicker.DatePicker;
-import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.component.timepicker.TimePicker;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import school.newton.sysjs2.grupp3.UAR.backend.model.Staff;
+
 import school.newton.sysjs2.grupp3.UAR.backend.model.Staffschedule;
 
 import java.sql.Date;

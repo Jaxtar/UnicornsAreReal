@@ -7,6 +7,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
 import org.springframework.boot.test.context.SpringBootTest;
 
 import school.newton.sysjs2.grupp3.UAR.backend.model.Movie;

@@ -1,11 +1,13 @@
 package school.newton.sysjs2.grupp3.UAR.UI;
 
-
 import org.apache.commons.lang3.time.DateUtils;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
+
 import org.springframework.boot.test.context.SpringBootTest;
+
 import school.newton.sysjs2.grupp3.UAR.backend.model.Screening;
 
 import java.sql.Date;
@@ -16,7 +18,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static java.time.LocalDate.*;
+import static java.time.LocalDate.of;
 
 /**
  * Test fail
