@@ -4,8 +4,8 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dependency.CssImport;
-import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
@@ -25,7 +25,7 @@ public class BookingView extends VerticalLayout{
     ComboBox<Movie> movie = new ComboBox<>("Movies");
     ComboBox<Screening> date = new ComboBox<>("Screening Date");
     Button book = new Button("Wanna book this?");
-    H1 bookingText = new H1("Your booking has been saved");
+    TextField email = new TextField("Email:");
 
     private int seatsLeft = 0;
     
@@ -47,18 +47,18 @@ public class BookingView extends VerticalLayout{
         movie.setItemLabelGenerator(Movie::getTitle);
         movie.addValueChangeListener(e -> updateDateTime(e.getValue().getMovieid()));
         movie.setWidth("25%");
-
         
         date.setWidth("25%");
+
+        email.addValueChangeListener(e -> bookingValidify());
         
         book.setEnabled(false);
         book.addClickListener(e -> bookScreening());
 
-        bookingText.setVisible(false);
-
-        add(movie, date, book, bookingText);
+        add(email, movie, date, book);
     }
 
+    // Converts the old sql.Date to the accepted LocalDate and gets the Screenings for the movie
     private void updateDateTime(Integer id){
         date.setItems(screenController.getScreeningsByMovieID(id));
         date.setItemLabelGenerator(e -> {
@@ -72,12 +72,19 @@ public class BookingView extends VerticalLayout{
                                         + getSeatsLeft(e)
                                         + " seats left)";
                                     });
-        date.addValueChangeListener(e -> {
-                                            if(getSeatsLeft(e.getValue()) != 0) {book.setEnabled(true);}
-                                            else {book.setEnabled(false);}
-                                    });
+        date.addValueChangeListener(e -> bookingValidify());
     }
 
+    private void bookingValidify(){
+        if(getSeatsLeft(date.getValue()) != 0 && !email.isEmpty()) {
+            book.setEnabled(true);
+        }
+        else {
+            book.setEnabled(false);
+        }
+    }
+
+    // Gets the amount of seats left for the given screening of a movie
     private int getSeatsLeft(Screening screening){
         seatsLeft = salonController.getSalonBySalonID(screening.get_salonid()).get(0).getNumberofseats();
         seatsLeft -= bookingController.getBookingsByScreeningID(screening.getScreeningid()).size();
@@ -85,6 +92,7 @@ public class BookingView extends VerticalLayout{
         return seatsLeft;
     }
 
+    // Books the screening
     private void bookScreening(){
         bookingController.save(new Booking(date.getValue().getScreeningid(), getSeatsLeft(date.getValue())));
         UI.getCurrent().navigate(SuccessfulView.class);
