@@ -25,7 +25,7 @@ public class Navbar extends AppLayout{
         name.addClickListener(e -> UI.getCurrent().navigate(MainPage.class));
         
         Button movies = new Button("Movies");
-        movies.addClickListener(e -> UI.getCurrent().navigate(MoviesView.class));
+        movies.addClickListener(e -> UI.getCurrent().navigate(MainPage.class));
 
         Button ticket = new Button("Book A Ticket");
         ticket.addClickListener(e -> UI.getCurrent().navigate(BookingView.class));
